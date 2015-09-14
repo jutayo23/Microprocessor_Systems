@@ -33,7 +33,6 @@ void UART0_INIT(void);
 //------------------------------------------------------------------------------------
 void main(void)
 {
-	char choice;
 	char i;
 	char count;
 	
@@ -48,31 +47,14 @@ void main(void)
 	
 	while(1)
 	{
-		P2 = P1;
+		P2 = P1;						// Set the outputs on port 2 to match the inputs on port 1
 		count = 0;
-		for(i=0; i<6; i++)
+		for(i=0; i<6; i++)				// Iterate through the 6 I/O we are monitoring
 		{
-			count = ((P1 & (1<<i)) > 0) ? count+1:count;
+			count = ((P1 & (1<<i)) > 0) ? count+1:count; // Increment count if bit i on P1 is HIGH
 		}
 
-		P3 = count;
-		/*
-		choice=getchar();
-		if(choice == 0x1b)
-			return;
-		if(choice > 126 || choice < 32) {
-			printf("\033[u");
-			printf("\033[5mThe keyboard character $%02x is \033[4m'not printable'\033[0m", choice);
-			printf("\033[33m"); //Yellow text
-			printf("\033[44m\n\r"); //Blue background
-			printf("\033[s");
-			putchar(0x07);
-		}
-		else {
-			printf("\033[6;0H"); //Cursor to line 6
-			printf("The keyboard character is \033[37m%c\033[33m\r", choice);
-		}
-		*/
+		P3 = count;						// Port 3 is set to the value of count to be displayed by the 7 segment display
 	}
 
 }

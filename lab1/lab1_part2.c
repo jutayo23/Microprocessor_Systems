@@ -34,8 +34,6 @@ void UART0_INIT(void);
 void main(void)
 {
 	char choice;
-	char i;
-	char count;
 	
 	WDTCN = 0xDE;						// Disable the watchdog timer
 	WDTCN = 0xAD;
@@ -53,37 +51,27 @@ void main(void)
 	printf("\033[s");					// Save the cursor position to return to later
 	printf("\033[13;25r");				// Apply scrolling to lower half of terminal
 
-	printf("\033[2;23H");				// Center exit help text
+	printf("\033[2;23H");				// Center help text
 	printf("Type <ESC> to end the program\n");
 
 	
 	while(1)
 	{
-		P2 = P1;
-		count = 0;
-		for(i=0; i<6; i++)
-		{
-			count = ((P1 & (1<<i)) > 0) ? count+1:count;
-		}
-
-		P3 = count;
-		/*
-		choice=getchar();
-		if(choice == 0x1b)
+		choice=getchar();				// Read input character to process
+		if(choice == 0x1b)				// Escape character
 			return;
-		if(choice > 126 || choice < 32) {
-			printf("\033[u");
-			printf("\033[5mThe keyboard character $%02x is \033[4m'not printable'\033[0m", choice);
-			printf("\033[33m"); //Yellow text
-			printf("\033[44m\n\r"); //Blue background
-			printf("\033[s");
-			putchar(0x07);
+		if(choice > 126 || choice < 32) { // Characters in this range are not printable
+			printf("\033[u");			// Restore the cursor position
+			printf("\033[5mThe keyboard character $%02x is \033[4m'not printable'\033[0m", choice); // User message with blink and underline
+			printf("\033[33m");			// Yellow text
+			printf("\033[44m\n\r");		// Blue background
+			printf("\033[s");			// Save the cursor position
+			putchar(0x07);				// Beep
 		}
 		else {
-			printf("\033[6;0H"); //Cursor to line 6
-			printf("The keyboard character is \033[37m%c\033[33m\r", choice);
+			printf("\033[6;0H"); // Set cursor to line 6
+			printf("The keyboard character is \033[37m%c\033[33m\r", choice); // Printable character is output overwriting previous value
 		}
-		*/
 	}
 
 }
