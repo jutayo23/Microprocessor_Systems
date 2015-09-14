@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------
-// Hello.c
+// lab1_part2.c
 //------------------------------------------------------------------------------------
 //8051 Test program to demonstrate serial port I/O.  This program writes a message on
 //the console using the printf() function, and reads characters using the getchar()

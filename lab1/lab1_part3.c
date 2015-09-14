@@ -1,11 +1,10 @@
 //------------------------------------------------------------------------------------
-// Hello.c
+// lab1_part3.c
 //------------------------------------------------------------------------------------
-//8051 Test program to demonstrate serial port I/O.  This program writes a message on
-//the console using the printf() function, and reads characters using the getchar()
-//function.  An ANSI escape sequence is used to clear the screen if a '2' is typed. 
-//A '1' repeats the message and the program responds to other input characters with
-//an appropriate message.
+//8051 Test program to demonstrate port I/O.  This program reads the inputs on port 1
+//and sets them as outputs on port 2 to match port 1. Additionally, the number of
+//input pins that are high is counted and this number is output on the first four pins
+//of port 3 to be displayed by a 7 segment display.
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
