@@ -41,6 +41,10 @@ void SYSCLK_INIT(void);
 void UART0_INIT(void);
 
 void SW2_ISR (void) __interrupt 0;
+
+char interrupt_detected = 0;
+
+
 //-------------------------------------------------------------------------------------------
 // MAIN Routine
 //-------------------------------------------------------------------------------------------
@@ -51,8 +55,6 @@ void main (void)
 	unsigned int delay1, delay2 = 0;
 	unsigned int randnum = 0;
 	unsigned int ones, tenths = 0;
-
-	char interrupt_detected = 0;
 	
 	SFRPAGE = CONFIG_PAGE;
 
@@ -68,17 +70,20 @@ void main (void)
 	printf("\033[2J");			// Erase screen and move cursor to the home posiiton.
 	printf("MPS Interrupt Switch Test\n\n\r");
 	printf("Ground /INT0 on P0.2 to generate an interrupt.\n\n\r");
-
 	SFRPAGE = CONFIG_PAGE;
-	EX0		= 1;				// Enable Ext Int 0 only after everything is settled.
+	EX0		= 1;				// Enable Ext Int 0 only after everything is settled
+
+	SFRPAGE = UART0_PAGE;
 
 	while (1)
 	{
-		printf("\033[H"); //Cursor to home position
-		if (interrupt_detected > 0) 
-			printf("Interrupt detected");
-		else
-			printf("No interrupt detected");
+		if (interrupt_detected > 0)
+		{
+			printf("Interrupt detected\n\r");
+			interrupt_detected = 0;
+		}
+		/*else
+			printf("No interrupt detected");*/
 	}
 }
 //-------------------------------------------------------------------------------------------
@@ -94,6 +99,7 @@ void SW2_ISR (void) __interrupt 0		// Interrupt 0 corresponds to vector address 
 // Priority Order number in Table 11.4 in the 8051 reference manual.
 {
 	interrupt_detected = 1;
+	//printf("/INT0 has been grounded!\n\n\r");
 }
 
 //-------------------------------------------------------------------------------------------
