@@ -40,7 +40,9 @@ void PORT_INIT(void);
 void SYSCLK_INIT(void);
 void UART0_INIT(void);
 
-void SW2_ISR (void) __interrupt 0;
+void timer0_ISR (void) __interrupt 1;
+
+unsigned char interrupt_count = 0;
 //-------------------------------------------------------------------------------------------
 // MAIN Routine
 //-------------------------------------------------------------------------------------------
@@ -52,8 +54,8 @@ void main (void)
 	unsigned int randnum = 0;
 	unsigned int ones, tenths = 0;
 
-	char interrupt_count = 0;
-	char tenths_seconds = 0;
+	unsigned char tenths_seconds = 0;
+	unsigned int seconds;
 	
 	SFRPAGE = CONFIG_PAGE;
 
@@ -67,22 +69,22 @@ void main (void)
 	SFRPAGE = UART0_PAGE;		// Direct output to UART0
 	
 	printf("\033[2J");			// Erase screen and move cursor to the home posiiton.
-	printf("MPS Interrupt Switch Test\n\n\r");
+	printf("MPS Interrupt Timer Test\n\n\r");
 	printf("Ground /INT0 on P0.2 to generate an interrupt.\n\n\r");
 
-	SFRPAGE = CONFIG_PAGE;
-	EX0		= 1;				// Enable Ext Int 0 only after everything is settled.
+
+	SFRPAGE = UART0_PAGE;
 
 	while (1)
 	{
-		printf("\033[H"); //Cursor to home position
-		if (interrupt_count == 135) {
+		if (interrupt_count == 51) {
+			printf("\033[2K\rSeconds elapsed: %d.%d", seconds, tenths_seconds);
 			tenths_seconds = tenths_seconds + 1;
 			interrupt_count = 0;
-		}
-		
-		if (tenths_seconds % 10 == 0 && tenths_seconds != 0) {
-			printf("Seconds passed: %d", tenths_seconds/10);
+			if (tenths_seconds % 10 == 0 && tenths_seconds != 0) {
+				tenths_seconds = 0;
+				seconds = seconds + 1;
+			}
 		}
 	}
 }
@@ -94,7 +96,7 @@ void main (void)
 //
 // This routine stops Timer0 when the user presses SW2.
 //
-void SW2_ISR (void) __interrupt 0		// Interrupt 0 corresponds to vector address 0003h.
+void timer0_ISR (void) __interrupt 1		// Interrupt 0 corresponds to vector address 0003h.
 // the keyword "interrupt" defines this as an ISR and the number is determined by the 
 // Priority Order number in Table 11.4 in the 8051 reference manual.
 {
@@ -146,10 +148,10 @@ void SYSCLK_INIT(void)
 	OSCXCN = 0x67;			// Start external oscillator
 	for(i=0; i < 256; i++);	// Wait for the oscillator to start up.
 	while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
-	CLKSEL = 0x11;			// SYSCLK derived from the crystal/2
+	CLKSEL = 0x01;			// SYSCLK derived from the crystal/2
 	OSCICN = 0x00;			// Disable the internal oscillator.
 
-	/*SFRPAGE = CONFIG_PAGE;
+	SFRPAGE = CONFIG_PAGE;
 	PLL0CN = 0x04;
 	SFRPAGE = LEGACY_PAGE;
 	FLSCL = 0x10;
@@ -163,7 +165,7 @@ void SYSCLK_INIT(void)
 	while(!(PLL0CN & 0x10));
 	CLKSEL = 0x02;			// SYSCLK derived from the PLL.
 
-	SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page.*/
+	SFRPAGE = SFRPAGE_SAVE;	// Restore SFR page
 }
 
 //-------------------------------------------------------------------------------------------
@@ -187,6 +189,12 @@ void UART0_INIT(void)
 	CKCON	|= 0x10;		// Timer1 uses SYSCLK as time base.
 	TL1		 = TH1;
 	TR1		 = 1;			// Start Timer1.
+
+	TMOD &= 0xF0;
+	TMOD |= 0x08;
+
+	ET0 = 1;
+	TR0 = 1;
 
 	SFRPAGE = UART0_PAGE;
 	TI0 = 1;				// Indicate TX0 ready.
