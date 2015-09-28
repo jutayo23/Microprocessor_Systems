@@ -1,11 +1,9 @@
-// IntrptEx.c
+// part1.c
 //
-// 8051 Interrupt Example Program
-// Alexey Gutin
-// March 2, 2007
+// 8051 Interrupt Program
 //
 // This program uses an interrupt to call the ISR handler
-// function, SWR_ISR(), when the /INT0 line is grounded.
+// function, SW2_ISR(), when the /INT0 line is grounded.
 // Each time the signal makes a low transition, an interrupt will be
 // generated.  If the line is held down, the SWR_ISR()
 // function will only be executed once, and not be called
@@ -77,7 +75,7 @@ void main (void)
 
 	while (1)
 	{
-		if (interrupt_detected > 0)
+		if (interrupt_detected > 0) // Set in the ISR below
 		{
 			printf("Interrupt detected\n\r");
 			interrupt_detected = 0;

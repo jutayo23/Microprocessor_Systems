@@ -1,11 +1,14 @@
-// part2.c
+// IntrptEx.c
 //
-// 8051 Interrupt Program
+// 8051 Interrupt Example Program
 //
 // This program uses an interrupt to call the ISR handler
 // function, timer0_ISR(), when the timer overflows.
 // Each time the timer overflows, it resets to zero and 
 // begins counting again until the next overflow.
+//
+// /INT0 is configured to be on P0.2
+// UART0 is used to communicate to the user through ProCOMM
 //
 // This code was written and tested using the SiLabs IDE 
 // and SDCC.
@@ -35,7 +38,7 @@ void UART0_INIT(void);
 
 void timer0_ISR (void) __interrupt 1;
 
-unsigned char interrupt_count = 0;
+unsigned int interrupt_count = 0;
 //-------------------------------------------------------------------------------------------
 // MAIN Routine
 //-------------------------------------------------------------------------------------------
@@ -63,15 +66,17 @@ void main (void)
 	
 	printf("\033[2J");			// Erase screen and move cursor to the home posiiton.
 	printf("MPS Interrupt Timer Test\n\n\r");
+	printf("Ground /INT0 on P0.2 to generate an interrupt.\n\n\r");
+
 
 	SFRPAGE = UART0_PAGE;
 
 	while (1)
 	{
-		if (interrupt_count == 51) { // .1 seconds is roughly 51 overflows of timer 0
+		if (interrupt_count == 404) { // need 405 overflows to count .1 seconds
 			printf("\033[2K\rSeconds elapsed: %d.%d", seconds, tenths_seconds);
 			tenths_seconds = tenths_seconds + 1;
-			interrupt_count = 0; // reset interrupt count to begin counting next .1 seconds
+			interrupt_count = 0;
 			if (tenths_seconds % 10 == 0 && tenths_seconds != 0) {
 				tenths_seconds = 0;
 				seconds = seconds + 1;
@@ -85,10 +90,14 @@ void main (void)
 // NOTE: this is an example of what NOT to do in an interrupt handler. No I/O should be done
 // in ISRs since I/O is very slow and the handler must execute very quickly.
 //
+// This routine stops Timer0 when the user presses SW2.
+//
 void timer0_ISR (void) __interrupt 1		// Interrupt 0 corresponds to vector address 0003h.
 // the keyword "interrupt" defines this as an ISR and the number is determined by the 
 // Priority Order number in Table 11.4 in the 8051 reference manual.
 {
+	TL0 = 64512; // Restart counter to only count for 1024 clock ticks
+	TH0 = 64512 >> 8;
 	interrupt_count = interrupt_count + 1;
 }
 
@@ -137,7 +146,7 @@ void SYSCLK_INIT(void)
 	OSCXCN = 0x67;			// Start external oscillator
 	for(i=0; i < 256; i++);	// Wait for the oscillator to start up.
 	while(!(OSCXCN & 0x80));// Check to see if the Crystal Oscillator Valid Flag is set.
-	CLKSEL = 0x01;			// SYSCLK derived from the crystal/2
+	CLKSEL = 0x01;			// SYSCLK derived from the External Oscillator circuit.
 	OSCICN = 0x00;			// Disable the internal oscillator.
 
 	SFRPAGE = CONFIG_PAGE;
@@ -179,8 +188,9 @@ void UART0_INIT(void)
 	TL1		 = TH1;
 	TR1		 = 1;			// Start Timer1.
 
-	TMOD &= 0xF0;
+	TMOD &= 0xF0; 			// Setup timer0 for 16 bit mode
 	TMOD |= 0x08;
+	TMOD |= 0x01;
 
 	ET0 = 1;
 	TR0 = 1;
