@@ -22,18 +22,41 @@ void Port_IO_Init(void);
 void Oscillator_Init(void);
 void Interrupts_Init(void);
 void Init_Device(void);
+void UART0_ISR (void) __interrupt 4;
+
+char moo = 0;
 
 
 void main(void)
 {
-	
+	char idk;
 	WDTCN = 0xDE;						// Disable the watchdog timer
 	WDTCN = 0xAD;
 
 	Init_Device();
-	SFRPAGE   = UART0_PAGE;
-	printf("moo");
+	while(1)
+	{
+		SFRPAGE = UART0_PAGE;
+		//SBUF0 = 0x35;
+		if(moo == 1)
+		{
+			//SBUF0 = SBUF0;
+			SBUF0 = 0x34;
+			moo = 0;
+		}
+		//printf("%d", idk);
+		SFRPAGE = UART1_PAGE;
+		SBUF1 = 0x36;
 
+	}
+
+}
+
+void UART0_ISR (void) __interrupt 4
+{
+	moo = 1;
+	TI0 = 0;
+	RI0 = 0;
 }
 
 // Peripheral specific initialization functions,
@@ -41,22 +64,33 @@ void main(void)
 void Timer_Init()
 {
     SFRPAGE   = TIMER01_PAGE;
-    TCON      = 0x40;
-    TMOD      = 0x20;
-    CKCON     = 0x10;
-    TH1		  = 0xF4;//TH1       = 0xFA;
+    TCON      = 0x40; // TR1 = 1
+    TMOD      = 0x20; // TIM1 8-bit auto-reload
+    CKCON     = 0x10; // TIM1 system clock
+	TH1 = 0xA0;
+    //TH1		  = 0xF4;//TH1       = 0xFA;
 	//TL1		 = TH1;
+
+	//Timer 2
+	SFRPAGE = TMR2_PAGE;
+	TMR2CN = 0x00;
+	TR2 = 1;
+	TMR2CF = 0x08; // sysclk
+	RCAP2H = 0xFF;
+	RCAP2L = 0xF4;
 }
 
 void UART_Init()
 {
     SFRPAGE   = UART0_PAGE;
     SCON0     = 0x50;
-	SSTA0	  = 0x10;
-	TI0 = 1;
+	SSTA0	  = 0x15;
+	//TI0 = 1;
 
     SFRPAGE   = UART1_PAGE;
-    SCON1     = 0x50;
+    SCON1     = 0x10;
+	//TI1 = 1;
+
 }
 
 void Port_IO_Init()
@@ -99,9 +133,9 @@ void Port_IO_Init()
 
     SFRPAGE   = CONFIG_PAGE;
     XBR0      = 0x04;
-    XBR2      = 0x40;
+    XBR2      = 0x44;
 
-	P0MDOUT |= 0x01;					// Set TX0 pin to push-pull
+	P0MDOUT |= 0x05;					// Set TX0 pin to push-pull
 }
 
 void Oscillator_Init()
@@ -131,7 +165,8 @@ void Oscillator_Init()
 
 void Interrupts_Init()
 {
-    IE        = 0x98;
+	EA = 1;
+    IE |= 0xB8;
 }
 
 // Initialization function for device,
@@ -142,5 +177,5 @@ void Init_Device(void)
     UART_Init();
     Port_IO_Init();
     Oscillator_Init();
-    //Interrupts_Init();
+    Interrupts_Init();
 }
