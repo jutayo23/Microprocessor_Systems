@@ -20,45 +20,70 @@ void Timer_Init(void);
 void UART_Init(void);
 void Port_IO_Init(void);
 void Oscillator_Init(void);
+void Interrupts_Init(void);
 void Init_Device(void);
+void UART0_ISR (void) __interrupt 4;
 
 char nput;
 
+
 void main(void)
 {
+	char uart1_high = 0; //Flag to indicate UART1's priority level (0 = low, 1 = high)
+	char i;
 	WDTCN = 0xDE;						// Disable the watchdog timer
 	WDTCN = 0xAD;
+
+	SFRPAGE = LEGACY_PAGE;
+	IT0	= 1;					// /INT0 is edge triggered, falling-edge.	
+
+	SFRPAGE = CONFIG_PAGE;
+	//ES0		= 1;				// Enable Ext Int 0 only after everything is settled
+	//IE |= 0x90;
 
 	Init_Device();
 	while(1)
 	{
-		SFRPAGE = UART0_PAGE;
-		if(RI0 == 1)
-		{
-			RI0 = 0;
-			nput = SBUF0;
-			if(nput == 0x1B)
-			{
-				printf("GOODBYE");
-				SFRPAGE = UART1_PAGE;
-				printf("GOODBYE");
-				while(1);
-			}
-			SBUF0 = SBUF0;
-			SFRPAGE = UART1_PAGE;
-			SBUF1 = nput;
-		}
-		SFRPAGE = UART1_PAGE;
-		if(RI1 == 1)
-		{
-			RI1 = 0;
-			nput = SBUF1;
-			SBUF1 = SBUF1;
-			SFRPAGE = UART0_PAGE;
-			SBUF0 = nput;
-		}
+		for (i = 0; i < 100; i++) {} //do nothing
+		if(uart1_high)
+			EIP2 &= ~0x40; //Set UART1 priority to low
+		else
+			EIP2 |= 0x40;//Set UART1 priority to high
 	}
 
+}
+
+void UART0_ISR (void) __interrupt 4
+{
+	if (RI0 == 1)
+	{
+		RI0 = 0;
+		nput = SBUF0;
+		SBUF0 = nput;
+		SFRPAGE = UART1_PAGE;
+		SBUF1 = nput;
+	}
+	if (TI0 == 1)
+	{
+		TI0 = 0;
+	}
+}
+
+void UART1_ISR (void) __interrupt 20
+{
+	if (RI1 == 1)
+	{
+		RI1 = 0;
+		nput = SBUF1;
+		SBUF1 = nput;
+		TI1 = 0;
+		SFRPAGE = UART0_PAGE;
+		SBUF0 = nput;
+	}
+	if (TI1 == 1)
+	{
+		TI1 = 0;
+	}
 }
 
 // Peripheral specific initialization functions,
@@ -167,6 +192,13 @@ void Oscillator_Init()
 	CLKSEL = 0x02;*/
 }
 
+void Interrupts_Init()
+{
+	//EA = 1;
+    IE |= 0x90;
+	EIE2 |= 0x40;
+}
+
 // Initialization function for device,
 // Call Init_Device() from your main program
 void Init_Device(void)
@@ -175,4 +207,5 @@ void Init_Device(void)
     UART_Init();
     Port_IO_Init();
     Oscillator_Init();
+    Interrupts_Init();
 }
