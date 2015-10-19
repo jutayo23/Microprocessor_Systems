@@ -14,72 +14,72 @@
 void main(void);
 void Timer_Init(void);
 void UART_Init(void);
+void SPI_Init(void);
 void Port_IO_Init(void);
 void Oscillator_Init(void);
-void Interrupts_Init(void);
 void Init_Device(void);
-void UART0_ISR (void) __interrupt 4;
 
 char nput;
 
-
 void main(void)
 {
-	char uart1_high = 0; //Flag to indicate UART1's priority level (0 = low, 1 = high)
-	char i;
+	int i, row1 = 2, col1 = 1, row2 = 13, col2 = 1;
 	WDTCN = 0xDE;						// Disable the watchdog timer
 	WDTCN = 0xAD;
 
 	Init_Device();
+	SFRPAGE = UART0_PAGE;
+	printf("Input characters:\033[s");
+	printf("\033[12;1HReceived characters:");
 	while(1)
 	{
-		// Alternate UART interrupt prioritys to check both interrupts equally
-		for (i = 0; i < 100; i++) {} //do nothing
-		if(uart1_high)
-			EIP2 &= ~0x40; //Set UART1 priority to low
-		else
-			EIP2 |= 0x40;//Set UART1 priority to high
-	}
-
-}
-
-void UART0_ISR (void) __interrupt 4
-{
-	if (RI0 == 1) // Receive flag triggered interrupt
-	{
-		RI0 = 0;
-		nput = SBUF0; // Read input register
-		if(nput == 0x1B)
-		{
-			printf("GOODBYE");
-			SFRPAGE = UART1_PAGE;
-			printf("GOODBYE");
-			while(1);
-		}
-		SBUF0 = nput; // Echo character to UART0
-		SFRPAGE = UART1_PAGE;
-		SBUF1 = nput; // Echo character to UART1
-	}
-	if (TI0 == 1)
-	{
-		TI0 = 0;
-	}
-}
-
-void UART1_ISR (void) __interrupt 20
-{
-	if (RI1 == 1)
-	{
-		RI1 = 0;
-		nput = SBUF1;
-		//SBUF1 = nput; // Comment this out to communicate with other groups to prevent the endless feedback
 		SFRPAGE = UART0_PAGE;
-		SBUF0 = nput;
+		if(RI0 == 1) // New character received
+		{
+			RI0 = 0;
+			nput = SBUF0;
+			if(nput == 0x1B)
+			{
+				printf("GOODBYE");
+				while(1);
+			}
+			else {
+				printf("\033[%d;%dH%c", row1, col1, nput); // Set row and column
+				if(col1 == 80) {
+					col1 = 1;
+					row1++;
+				}
+				else {
+					col1++;
+				}
+			}					
+			
+			SFRPAGE = 0x00;
+
+			NSSMD0 = 0;
+			while(SPI0CFG & 0x80 > 0); // Wait for SPI
+			SPIF = 0;
+			SPI0DAT = nput; // Send character to SPI
+			while(TXBMT == 0); // Wait for TX buffer to be set
+						
+			for(i=0; i<100; i++); // Allow slave time to react
+			NSSMD0 = 1; // Set slave select HIGH
+			SPI0DAT = 0xFF; // Set dummy character
+
+			while(SPI0CFG & 0x80 > 0); // Wait for slave to respond
+			nput = SPI0DAT; // Read response
+			printf("\033[%d;%dH%c", row2, col2, nput); // Print response
+			if(col2 == 80) {
+				col2 = 1;
+				row2++;
+			}
+			else {
+				col2++;
+			}
+		}
+	
 	}
-	if (TI1 == 1)
-	{
-		TI1 = 0;
-	}
+
 }
 
 // Peripheral specific initialization functions,
@@ -91,6 +91,8 @@ void Timer_Init()
     TMOD      = 0x20; // TIM1 8-bit auto-reload
     CKCON     = 0x10; // TIM1 system clock
 	TH1 = 0xA0;
+    //TH1		  = 0xF4;//TH1       = 0xFA;
+	//TL1		 = TH1;
 
 	//Timer 2
 	SFRPAGE = TMR2_PAGE;
@@ -106,19 +108,32 @@ void UART_Init()
     SFRPAGE   = UART0_PAGE;
     SCON0     = 0x50;
 	SSTA0	  = 0x15;
+	TI0 = 1;
 
     SFRPAGE   = UART1_PAGE;
     SCON1     = 0x10;
+	//TI1 = 1;
+}
+
+void SPI_Init()
+{
+	SFRPAGE = SPI0_PAGE;
+	SPI0CFG |= 0x40;
+	SPI0CKR = 0x6E;
+
+	SPI0CN |= 0x04;
+
+	SPIEN = 1;
 }
 
 void Port_IO_Init()
 {
-
     SFRPAGE   = CONFIG_PAGE;
-    XBR0      = 0x04;
+    XBR0      = 0x06;
     XBR2      = 0x44;
 
 	P0MDOUT |= 0x05;					// Set TX0 pin to push-pull
+	P0MDOUT |= 0x30;
 }
 
 void Oscillator_Init()
@@ -133,19 +148,13 @@ void Oscillator_Init()
 
 }
 
-void Interrupts_Init()
-{
-    IE |= 0x90;
-	EIE2 |= 0x40; // Enable UART1 interrupts
-}
-
 // Initialization function for device,
 // Call Init_Device() from your main program
 void Init_Device(void)
 {
     Timer_Init();
     UART_Init();
+	SPI_Init();
     Port_IO_Init();
     Oscillator_Init();
-    Interrupts_Init();
 }

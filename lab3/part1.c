@@ -1,7 +1,3 @@
-/////////////////////////////////////
-//  Generated Initialization File  //
-/////////////////////////////////////
-
 #include <c8051f120.h>
 #include <stdio.h>
 #include "putget.h"
@@ -33,29 +29,29 @@ void main(void)
 	while(1)
 	{
 		SFRPAGE = UART0_PAGE;
-		if(RI0 == 1)
+		if(RI0 == 1) // Check for UART 0 data
 		{
-			RI0 = 0;
-			nput = SBUF0;
-			if(nput == 0x1B)
+			RI0 = 0; // Reset flag for next receive
+			nput = SBUF0; // Read data register
+			if(nput == 0x1B) // Escape character is read
 			{
 				printf("GOODBYE");
 				SFRPAGE = UART1_PAGE;
 				printf("GOODBYE");
 				while(1);
 			}
-			SBUF0 = SBUF0;
+			SBUF0 = SBUF0; // Echo character to UART0
 			SFRPAGE = UART1_PAGE;
-			SBUF1 = nput;
+			SBUF1 = nput; // Echo character to UART1
 		}
 		SFRPAGE = UART1_PAGE;
-		if(RI1 == 1)
+		if(RI1 == 1) // Check for UART 1 data
 		{
 			RI1 = 0;
 			nput = SBUF1;
-			SBUF1 = SBUF1;
+			SBUF1 = SBUF1; // Echo character to UART1
 			SFRPAGE = UART0_PAGE;
-			SBUF0 = nput;
+			SBUF0 = nput; // Echo character to UART0
 		}
 	}
 
@@ -70,8 +66,6 @@ void Timer_Init()
     TMOD      = 0x20; // TIM1 8-bit auto-reload
     CKCON     = 0x10; // TIM1 system clock
 	TH1 = 0xA0;
-    //TH1		  = 0xF4;//TH1       = 0xFA;
-	//TL1		 = TH1;
 
 	//Timer 2
 	SFRPAGE = TMR2_PAGE;
@@ -97,49 +91,11 @@ void UART_Init()
 
 void Port_IO_Init()
 {
-    // P0.0  -  TX0 (UART0), Open-Drain, Digital
-    // P0.1  -  RX0 (UART0), Open-Drain, Digital
-    // P0.2  -  Unassigned,  Open-Drain, Digital
-    // P0.3  -  Unassigned,  Open-Drain, Digital
-    // P0.4  -  Unassigned,  Open-Drain, Digital
-    // P0.5  -  Unassigned,  Open-Drain, Digital
-    // P0.6  -  Unassigned,  Open-Drain, Digital
-    // P0.7  -  Unassigned,  Open-Drain, Digital
-
-    // P1.0  -  Unassigned,  Open-Drain, Digital
-    // P1.1  -  Unassigned,  Open-Drain, Digital
-    // P1.2  -  Unassigned,  Open-Drain, Digital
-    // P1.3  -  Unassigned,  Open-Drain, Digital
-    // P1.4  -  Unassigned,  Open-Drain, Digital
-    // P1.5  -  Unassigned,  Open-Drain, Digital
-    // P1.6  -  Unassigned,  Open-Drain, Digital
-    // P1.7  -  Unassigned,  Open-Drain, Digital
-
-    // P2.0  -  Unassigned,  Open-Drain, Digital
-    // P2.1  -  Unassigned,  Open-Drain, Digital
-    // P2.2  -  Unassigned,  Open-Drain, Digital
-    // P2.3  -  Unassigned,  Open-Drain, Digital
-    // P2.4  -  Unassigned,  Open-Drain, Digital
-    // P2.5  -  Unassigned,  Open-Drain, Digital
-    // P2.6  -  Unassigned,  Open-Drain, Digital
-    // P2.7  -  Unassigned,  Open-Drain, Digital
-
-    // P3.0  -  Unassigned,  Open-Drain, Digital
-    // P3.1  -  Unassigned,  Open-Drain, Digital
-    // P3.2  -  Unassigned,  Open-Drain, Digital
-    // P3.3  -  Unassigned,  Open-Drain, Digital
-    // P3.4  -  Unassigned,  Open-Drain, Digital
-    // P3.5  -  Unassigned,  Open-Drain, Digital
-    // P3.6  -  Unassigned,  Open-Drain, Digital
-    // P3.7  -  Unassigned,  Open-Drain, Digital
-
     SFRPAGE   = CONFIG_PAGE;
     XBR0      = 0x04;
-	//XBR1	  = 0x04; // INT0
     XBR2      = 0x44;
-	//P0 = 0x06; // idk remove me
 
-	P0MDOUT |= 0x05;					// Set TX0 pin to push-pull
+	P0MDOUT |= 0x05;	// Set TX0 pin to push-pull
 }
 
 void Oscillator_Init()
@@ -152,19 +108,6 @@ void Oscillator_Init()
     CLKSEL    = 0x01;
     OSCICN    &= ~0x80;
 
-	/*SFRPAGE = CONFIG_PAGE;
-	PLL0CN = 0x04;
-	SFRPAGE = LEGACY_PAGE;
-	FLSCL = 0x10;
-	SFRPAGE = CONFIG_PAGE;
-	PLL0CN |= 0x01;
-	PLL0DIV = 0x04;
-	PLL0FLT = 0x01;
-	PLL0MUL = 0x09;
-	for(i=0; i < 256; i++);
-	PLL0CN |= 0x02;
-	while(!(PLL0CN & 0x10));
-	CLKSEL = 0x02;*/
 }
 
 // Initialization function for device,
