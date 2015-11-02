@@ -1,7 +1,9 @@
 //------------------------------------------------------------------------------------
-// lab4_part1.c
+// lab4_part3.c
 //------------------------------------------------------------------------------------
-//
+// Part 3 takes in an analog signal on AIN0.0, converts it to a digital signal using
+// the ADC, converts it back to an analog using the DAC and outputs it on the DAC0
+// pin. 
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
@@ -13,7 +15,7 @@
 // Global Constants
 //------------------------------------------------------------------------------------
 #define EXTCLK 22118400	// External oscillator frequency in Hz
-#define SYSCLK 22118400//49766400	// Output of PLL derived from (EXTCLK * 9/4)
+#define SYSCLK 22118400
 #define BAUDRATE 115200	// UART baud rate in bps
 
 //------------------------------------------------------------------------------------
@@ -39,16 +41,16 @@ void main(void)
 {	
 	unsigned short int analogval;
 	unsigned char *analoghi, *analoglow;
-	float VREF = 3;
-	float result;
+	float VREF = 3; //Voltage reference
+	float result; // ADC voltage result
 	short int result_high = 0;
 	short int result_low = 4095;
 	char samples = 0;
-	short int accum[16] = {0};
+	short int accum[16] = {0}; // Still compute the average
 	char i;
 	unsigned long int sum = 0;
 	unsigned int avg;
-	float result_dec1;
+	float result_dec1; // Need 2 variables to hold the decimal value to prevent overflow
 	float result_dec2;
 	analoglow = (char *) &analogval;
 	analoghi = analoglow + 1;
@@ -61,20 +63,13 @@ void main(void)
 	UART0_INIT(); // Initialize UART0
 	ADC_INIT(); // Initialize ADC0
 	INTERRUPT_INIT();
-	//TIMER_INIT();
 	DAC_INIT();
 
 	
 	
 	while(1)
 	{
-		/*if (dig_val == 4096) {
-			dig_val = 0;
-		}
-		else {
-			dig_val++;
-		}*/
-		dig_val = dig_val + 50;
+		//dig_val = dig_val + 50; // Generate the sawtooth
 		SFRPAGE = ADC0_PAGE;
 		AD0INT = 0; // Clear the "conversion done" flag
 		AD0BUSY = 1; // Start A/D Conversion
@@ -82,9 +77,9 @@ void main(void)
 		*analoglow = ADC0L; // Read the low byte
 		*analoghi = ADC0H; // Read the high byte
 		
-		SFRPAGE = DAC0_PAGE;
-		DAC0L = dig_val;//analogval;
-		DAC0H = dig_val>>8;//analogval >> 8;
+		SFRPAGE = DAC0_PAGE; // Output the digital value through the DAC
+		DAC0L = analogval; //digval;
+		DAC0H = analogval >> 8; //digval >> 8;
 		
 		SFRPAGE = UART0_PAGE;
 		result = analogval*2.4/(float)4095;
@@ -109,18 +104,16 @@ void main(void)
 		sum = 0;
 		for (i = 0; i < samples; i++) {
 			sum = sum + accum[i];
-			//printf("%d\n\r", accum[i]);
 		}
 		avg = (int)(sum/samples);
 		
 		result_dec1 = (1000*result-1000*(int)result);
-		result_dec2 = (1000*(result_dec1-(int)result_dec1));//-100*(int)(result_dec1-(int)result_dec1);
+		result_dec2 = (1000*(result_dec1-(int)result_dec1));
 		// Erase screen and move cursor to home position
 		printf("\033[2JVoltage reading: %d.%03d%03d\n\r", (int)result, (int)result_dec1, (int)result_dec2);
 		printf("Hex value: 0x%03X\n\r", analogval);
 		printf("High value hex: 0x%03X\n\r", result_high);
 		printf("Low value hex: 0x%03X\n\r", result_low);
-		//printf("Sum: %li\n\r", sum);
 		printf("Average value hex: 0x%03X\n\r", avg);
 	}
 }
@@ -131,22 +124,10 @@ void int0_interrupt(void) __interrupt 0
 	start_conversion = 1;
 }
 
-//Timer interrupt for Digital Signal generation
-void timer0_interrupt(void) __interrupt 1
-{
-	dig_val++;
-	if (dig_val == 4096)
-	{
-		dig_val = 0;
-	}
-}
-
 //------------------------------------------------------------------------------------
 // SYSCLK_Init
 //------------------------------------------------------------------------------------
-// 
 // Initialize the system clock to use a 22.1184MHz crystal as its clock source
-//
 void SYSCLK_INIT(void)
 {
 	int i = 0;
@@ -165,9 +146,7 @@ void SYSCLK_INIT(void)
 //------------------------------------------------------------------------------------
 // PORT_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the Crossbar and GPIO ports
-//
 void PORT_INIT(void)
 {	
 	SFRPAGE = CONFIG_PAGE;
@@ -189,9 +168,7 @@ void PORT_INIT(void)
 //------------------------------------------------------------------------------------
 // UART0_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the UART0 using Timer1, for <baudrate> and 8-N-1
-//
 void UART0_INIT(void)
 {
 	char SFRPAGE_SAVE = SFRPAGE;        // Save Current SFR page

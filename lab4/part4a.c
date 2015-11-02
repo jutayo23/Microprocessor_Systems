@@ -1,7 +1,8 @@
 //------------------------------------------------------------------------------------
-// lab4_part1.c
+// lab4_part4.c
 //------------------------------------------------------------------------------------
-//
+// Part 4 builds upon parts 1 and 3 of lab 4 by using the ADC and DAC, as well as the
+// MAC, to implement a notch filter. 
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
@@ -13,7 +14,7 @@
 // Global Constants
 //------------------------------------------------------------------------------------
 #define EXTCLK 22118400	// External oscillator frequency in Hz
-#define SYSCLK 22118400//49766400	// Output of PLL derived from (EXTCLK * 9/4)
+#define SYSCLK 22118400
 #define BAUDRATE 115200	// UART baud rate in bps
 
 //------------------------------------------------------------------------------------
@@ -44,36 +45,13 @@ void main(void)
 	unsigned short int analogval;
 	unsigned char analoghi, analoglow;
 	float VREF = 3;
-	//float result;
-	/*short int result_high = 0;
-	short int result_low = 4095;
-	char samples = 0;
-	short int accum[16] = {0};
-	char i;
-	unsigned long int sum = 0;
-	unsigned int avg;
-	float result_dec1;
-	float result_dec2;
-	*/
-
-	unsigned short int xk = 0;
-	unsigned short int xk_1 = 0;
-	unsigned short int xk_2 = 0;
-	unsigned short int yk = 0;
-	unsigned short int yk_1 = 0;
-
-	//analoglow = (char *) &analogval;
-	//analoghi = analoglow + 1;
 
 	WDTCN = 0xDE; // Disable the watchdog timer
 	WDTCN = 0xAD;
 	
 	PORT_INIT(); // Initialize the Crossbar and GPIO
 	SYSCLK_INIT(); // Initialize the oscillator
-	//UART0_INIT(); // Initialize UART0
 	ADC_INIT(); // Initialize ADC0
-	//INTERRUPT_INIT();
-	//TIMER_INIT();
 	DAC_INIT();
 	MAC_INIT();
 
@@ -90,24 +68,19 @@ void main(void)
 		analoghi = ADC0H; // Read the high byte
 		analogval = analoghi<<8 | analoglow;
 
-		adcValH[2] = adcValH[1];
-		adcValH[1] = adcValH[0];
-		adcValL[2] = adcValL[1];
-		adcValL[1] = adcValL[0];
+		// Update the variables in the filter equation
+		adcValH[2] = adcValH[1]; // x(k-2) high byte
+		adcValH[1] = adcValH[0]; // x(k-1) high byte
+		adcValL[2] = adcValL[1]; // x(k-2) low byte
+		adcValL[1] = adcValL[0]; // x(k-1) low byte
 
-		adcValH[0] = analoghi;
+		adcValH[0] = analoghi; // x(k) high and low bytes
 		adcValL[0] = analoglow;
 
-		/*yk_1 = yk;
-		xk_2 = xk_1;
-		xk_1 = xk;
-		xk = analogval;
-		yk = (xk + (float)10/13*xk_1 + xk_2 + 0.95*yk_1)*(float)10/32;
-		//yk = xk/2;
-		*/
 		SFRPAGE = MAC0_PAGE;
 		MAC0CF |= 0x08; // Clear MAC
 
+		// Load the MAC with the correct values and compute the filter equation
 		MAC0AH = 0x28;
 		MAC0AL = 0x00;
 		MAC0BH = adcValH[0];
@@ -123,91 +96,21 @@ void main(void)
 
 		MAC0AH = 0x26;
 		MAC0AL = 0x00;
-		/*MAC0AH = 0x40;
-		MAC0AL = 0x00;
-		
-		MAC0BH = analoghi;
-		MAC0BL = analoglow;*/
 
-		//MAC0BH = result>>8;
-		//MAC0BL = result;
+		SFRPAGE = MAC0_PAGE; // Delay with any dummy command
 
-		SFRPAGE = MAC0_PAGE; // Delay
-		SFRPAGE = MAC0_PAGE;
-		SFRPAGE = MAC0_PAGE;
-		SFRPAGE = MAC0_PAGE;
-		SFRPAGE = MAC0_PAGE;
-		SFRPAGE = MAC0_PAGE;
-		SFRPAGE = MAC0_PAGE;
-		SFRPAGE = MAC0_PAGE;
+		result = (int)MAC0RNDH<<8 | MAC0RNDL; // Read the result from the rounding engine
 
-		result = (int)MAC0RNDH<<8 | MAC0RNDL;
-
-		SFRPAGE = DAC0_PAGE;
+		SFRPAGE = DAC0_PAGE; // Output the result through the DAC
 		DAC0L = result;
 		DAC0H = result>>8;
-		
-		/*SFRPAGE = UART0_PAGE;
-		result = analogval*2.4/(float)4095;
-
-		// Maintain high and low hex values
-		if (analogval > result_high) result_high = analogval;
-		if (analogval < result_low) result_low = analogval;
-		
-		// Maintain the array of voltage readings
-		if (samples < 16) {
-			accum[samples] = analogval;
-			samples++;
-		}
-		else {
-			for (i = 0; i < samples-1; i++) {
-				accum[i] = accum[i+1];
-			}
-			accum[samples-1] = analogval;
-		}
-		
-		// Compute the average
-		sum = 0;
-		for (i = 0; i < samples; i++) {
-			sum = sum + accum[i];
-			//printf("%d\n\r", accum[i]);
-		}
-		avg = (int)(sum/samples);
-		
-		result_dec1 = (1000*result-1000*(int)result);
-		result_dec2 = (1000*(result_dec1-(int)result_dec1));//-100*(int)(result_dec1-(int)result_dec1);
-		// Erase screen and move cursor to home position
-		printf("\033[2JVoltage reading: %d.%03d%03d\n\r", (int)result, (int)result_dec1, (int)result_dec2);
-		printf("Hex value: 0x%03X\n\r", analogval);
-		printf("High value hex: 0x%03X\n\r", result_high);
-		printf("Low value hex: 0x%03X\n\r", result_low);
-		//printf("Sum: %li\n\r", sum);
-		printf("Average value hex: 0x%03X\n\r", avg);*/
-	}
-}
-
-//External Interrupt (Push Button) ISR
-void int0_interrupt(void) __interrupt 0
-{
-	start_conversion = 1;
-}
-
-//Timer interrupt for Digital Signal generation
-void timer0_interrupt(void) __interrupt 1
-{
-	dig_val++;
-	if (dig_val == 4096)
-	{
-		dig_val = 0;
 	}
 }
 
 //------------------------------------------------------------------------------------
 // SYSCLK_Init
 //------------------------------------------------------------------------------------
-// 
 // Initialize the system clock to use a 22.1184MHz crystal as its clock source
-//
 void SYSCLK_INIT(void)
 {
 	int i = 0;
@@ -226,9 +129,7 @@ void SYSCLK_INIT(void)
 //------------------------------------------------------------------------------------
 // PORT_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the Crossbar and GPIO ports
-//
 void PORT_INIT(void)
 {	
 	SFRPAGE = CONFIG_PAGE;
@@ -250,36 +151,28 @@ void PORT_INIT(void)
 //------------------------------------------------------------------------------------
 // UART0_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the UART0 using Timer1, for <baudrate> and 8-N-1
-//
 void UART0_INIT(void)
 {
-	char SFRPAGE_SAVE = SFRPAGE;        // Save Current SFR page
-
 	SFRPAGE = UART0_PAGE;
-	SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
-	SSTA0	 = 0x10;					// SMOD0 = 1
+	SCON0	 = 0x50; // Mode 1, 8-bit UART, enable RX
+	SSTA0	 = 0x10; // SMOD0 = 1
 	
 	SFRPAGE = TIMER01_PAGE;
 	TMOD	&= ~0xF0;
-	TMOD	|=  0x20;					// Timer1, Mode 2, 8-bit reload
+	TMOD	|=  0x20;	// Timer1, Mode 2, 8-bit reload
 	TH1		 = -SYSCLK/(BAUDRATE*16); // Set Timer1 reload baudrate value T1 Hi Byte
-	CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
+	CKCON	|= 0x10; // Timer1 uses SYSCLK as time base
 	TL1		 = TH1;
-	TR1		 = 1;						// Start Timer1
+	TR1		 = 1;	// Start Timer1
 
 	SFRPAGE = UART0_PAGE;
-	TI0 = 1;							// Indicate TX0 ready
-	
-	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	TI0 = 1; // Indicate TX0 ready
 }
 
 void ADC_INIT(void)
 {
-	char SFRPAGE_SAVE = SFRPAGE;
 	SFRPAGE = ADC0_PAGE;
-
 	AMX0CF = 0x00; // All input ports set to single-ended mode
 	AMX0SL = 0x00; // Select port AIN0.0 for inpit
 	ADC0CF = 0x20; // ADC clock rate < 2.5MHz, internal gain of 1
@@ -296,7 +189,6 @@ void DAC_INIT(void)
 
 void INTERRUPT_INIT(void) {
 	EA = 1;
-	//ET0 = 1; // Timer0 interrupts
 	EX0 = 1; //External interrupts
 }
 
