@@ -1,7 +1,8 @@
 //------------------------------------------------------------------------------------
 // lab4_part1.c
 //------------------------------------------------------------------------------------
-//
+// Part 1 acts like a digital voltmeter, taking in an analong input on AIN0.0 and 
+// displays the voltage on a terminal when a push button is pressed. 
 //------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
@@ -13,7 +14,7 @@
 // Global Constants
 //------------------------------------------------------------------------------------
 #define EXTCLK 22118400	// External oscillator frequency in Hz
-#define SYSCLK 22118400//49766400	// Output of PLL derived from (EXTCLK * 9/4)
+#define SYSCLK 22118400
 #define BAUDRATE 115200	// UART baud rate in bps
 
 //------------------------------------------------------------------------------------
@@ -36,12 +37,12 @@ void main(void)
 {	
 	unsigned short int analogval;
 	unsigned char *analoghi, *analoglow;
-	float VREF = 2.4;
-	float result;
+	float VREF = 2.4; // Reference voltage
+	float result; // Voltage measurement result
 	short int result_high = 0;
 	short int result_low = 4095;
-	char samples = 0;
-	short int accum[16] = {0};
+	char samples = 0; // Use the last 16 samples to take an average
+	short int accum[16] = {0}; // Array to hold the samples
 	char i;
 	unsigned long int sum = 0;
 	unsigned int avg;
@@ -96,7 +97,6 @@ void main(void)
 			sum = 0;
 			for (i = 0; i < samples; i++) {
 				sum = sum + accum[i];
-				//printf("%d\n\r", accum[i]);
 			}
 			avg = (int)(sum/samples);
 			
@@ -104,12 +104,9 @@ void main(void)
 			result_dec2 = (1000*(result_dec1-(int)result_dec1));//-100*(int)(result_dec1-(int)result_dec1);
 			// Erase screen and move cursor to home position
 			printf("\033[2JVoltage reading: %d.%03d%03d\n\r", (int)result, (int)result_dec1, (int)result_dec2);
-			//printf("Result dec1: %d", (int)result_dec1);
-			//printf("Result dec2: %d", (int)result_dec2);
 			printf("Hex value: 0x%03X\n\r", analogval);
 			printf("High value hex: 0x%03X\n\r", result_high);
 			printf("Low value hex: 0x%03X\n\r", result_low);
-			//printf("Sum: %li\n\r", sum);
 			printf("Average value hex: 0x%03X\n\r", avg);
 
 			start_conversion = 0;
@@ -127,9 +124,7 @@ void int0_interrupt(void) __interrupt 0
 //------------------------------------------------------------------------------------
 // SYSCLK_Init
 //------------------------------------------------------------------------------------
-// 
 // Initialize the system clock to use a 22.1184MHz crystal as its clock source
-//
 void SYSCLK_INIT(void)
 {
 	int i = 0;
@@ -148,14 +143,12 @@ void SYSCLK_INIT(void)
 //------------------------------------------------------------------------------------
 // PORT_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the Crossbar and GPIO ports
-//
 void PORT_INIT(void)
 {	
 	SFRPAGE = CONFIG_PAGE;
 
-	WDTCN	= 0xDE;			// Disable watchdog timer.
+	WDTCN	= 0xDE;	// Disable watchdog timer.
 	WDTCN	= 0xAD;
 
     XBR0 = 0x04;
@@ -172,29 +165,23 @@ void PORT_INIT(void)
 //------------------------------------------------------------------------------------
 // UART0_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the UART0 using Timer1, for <baudrate> and 8-N-1
-//
 void UART0_INIT(void)
 {
-	char SFRPAGE_SAVE = SFRPAGE;        // Save Current SFR page
-
 	SFRPAGE = UART0_PAGE;
-	SCON0	 = 0x50;					// Mode 1, 8-bit UART, enable RX
-	SSTA0	 = 0x10;					// SMOD0 = 1
+	SCON0	 = 0x50;	// Mode 1, 8-bit UART, enable RX
+	SSTA0	 = 0x10;	// SMOD0 = 1
 	
 	SFRPAGE = TIMER01_PAGE;
 	TMOD	&= ~0xF0;
-	TMOD	|=  0x20;					// Timer1, Mode 2, 8-bit reload
+	TMOD	|=  0x20;	// Timer1, Mode 2, 8-bit reload
 	TH1		 = -SYSCLK/(BAUDRATE*16); // Set Timer1 reload baudrate value T1 Hi Byte
-	CKCON	|= 0x10;					// Timer1 uses SYSCLK as time base
+	CKCON	|= 0x10;// Timer1 uses SYSCLK as time base
 	TL1		 = TH1;
-	TR1		 = 1;						// Start Timer1
+	TR1		 = 1;	// Start Timer1
 
 	SFRPAGE = UART0_PAGE;
-	TI0 = 1;							// Indicate TX0 ready
-	
-	SFRPAGE = SFRPAGE_SAVE;             // Restore SFR page
+	TI0 = 1;	// Indicate TX0 ready
 }
 
 void ADC_INIT(void)
