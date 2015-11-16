@@ -1,14 +1,6 @@
 //------------------------------------------------------------------------------------
 // memory.c
 //------------------------------------------------------------------------------------
-// This software writes a character to a specific address in external memory
-//  	NOTES:
-//	(1) /WR    = P4.7 (CNTRL signal)
-//	(2) /RD    = P4.6 (CNTRL signal)
-//	(3) D0-D7  = P7.0-P7.7 (DATA bus)
-//	(4) A0-A7  = P6.0-P6.7 (ADR bus lo byte)
-//	(5) A8-A15 = P5.0-P5.7 (ADR bus hi byte)
-//------------------------------------------------------------------------------------
 // Includes
 //------------------------------------------------------------------------------------
 #include <c8051f120.h>
@@ -34,16 +26,12 @@ unsigned char _sdcc_external_startup(void);
 //------------------------------------------------------------------------------------
 // _sdcc_external_startup
 //------------------------------------------------------------------------------------
-//
 //This is special function called by the system BEFORE main() is executed
-//
 // Disable watchdog timer before normal initialization - needed for memory
-//
 unsigned char _sdcc_external_startup(void)
 {
     WDTCN = 0xDE;   // Disable the watchdog timer
     WDTCN = 0xAD;
-
     return 0;       // init everything else normally
 }
 //------------------------------------------------------------------------------------
@@ -149,9 +137,7 @@ void main(void)
 //------------------------------------------------------------------------------------
 // SYSCLK_Init
 //------------------------------------------------------------------------------------
-//
 // Initialize the system clock to use a 22.1184MHz crystal as its clock source
-//
 void SYSCLK_INIT(void)
 {
     int i;
@@ -172,9 +158,7 @@ void SYSCLK_INIT(void)
 //------------------------------------------------------------------------------------
 // PORT_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the Crossbar and GPIO ports
-//
 void PORT_INIT(void)
 {
     char SFRPAGE_SAVE = SFRPAGE;    // Save Current SFR page
@@ -206,9 +190,7 @@ void PORT_INIT(void)
 //------------------------------------------------------------------------------------
 // UART0_Init
 //------------------------------------------------------------------------------------
-//
 // Configure the UART0 using Timer1, for <baudrate> and 8-N-1
-//
 void UART0_INIT(void)
 {
     char SFRPAGE_SAVE;
