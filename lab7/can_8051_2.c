@@ -11,13 +11,16 @@ void init_xbar( ) {
 	char save = SFRPAGE;
 
 	SFRPAGE = CONFIG_PAGE;
-	XBR0 = 0x04; // enable UART0
+	XBR0 = 0x0C; // enable UART0
 	XBR1 = 0x00; // enable nothing
 	XBR2 = 0x40; // enable the crossbar
 	XBR3 = 0x80; // enable CAN
 
 	P0MDOUT &= ~0x02; // RX pin input
 	P0MDOUT |= 0x01; // TX
+
+	P0MDOUT |= 0x34;
+
 	P3MDOUT &= 0xF0;
 	P3MDIN |= 0x0F;
 
@@ -34,6 +37,22 @@ void init_xbar( ) {
 	ADC0CN = 0x00;
 	REF0CN = 0x03;
 	AD0EN = 1;
+
+	// DAC
+	SFRPAGE = DAC0_PAGE;
+	DAC0CN = 0x80;
+
+	SFRPAGE = DAC1_PAGE;
+	DAC1CN = 0x80;
+
+	// PCA
+	SFRPAGE = 0x00;
+	PCA0MD = 0x88;
+	PCA0CPM0 = 0x42;
+	PCA0CPL0 = 0x00;
+	PCA0CPH0 = 0x00;
+	//PCA0L = 0x88;
+	PCA0CN = 0x40;
 
 	SFRPAGE = save;
 }
@@ -56,14 +75,17 @@ void boot_system( ) {
 
 void main( ) {
 	unsigned char ADval[2];
-	unsigned int result;
+	unsigned int counter = 0;
+	unsigned int result1;
+	unsigned int result2;
 	CAN_BUFFER canbuf;
 	boot_system( );
 
 
 	while (1) {
 
-		
+		/*
+
 		//printf("getting transmit buffer\r\n");
 		canbuf = can_get_tx_buf( );
 		//printf("setting message ID\r\n");
@@ -148,10 +170,113 @@ void main( ) {
 		can_set_buffer_data(canbuf, ADval, 2);
 		can_send_tx_buf(canbuf);
 		
+		*/
+
+		canbuf = can_get_tx_buf();
+
+		SFRPAGE = CAN0_PAGE;
 		
-		/*
+		//printf("%d\r\n", counter);
+		switch(counter)
+		{
+			case 100:
+				can_set_address_std(canbuf,0x07);
+				can_send_rtr(canbuf);
+				break;
+			case 400:
+				can_set_address_std(canbuf,0x09);
+				can_send_rtr(canbuf);
+				break;
+			case 700:
+				can_set_address_std(canbuf,0x0A);
+				can_send_rtr(canbuf);
+				break;
+			case 900:
+				can_set_address_std(canbuf,0x0B);
+				can_send_rtr(canbuf);
+				break;
+			case 1000:
+				counter = 0;
+				break;
+			default:
+				//counter = 0;
+		}
+		counter++;
+		
+
+		//can_send_rtr(canbuf);
+		//can_set_buffer_data(canbuf, 0x00, 1);
+		//can_send_tx_buf(canbuf);
+
 		if (canbuf = can_get_rx_msg( )) {
-			printf("got CAN message in!\r\n");
+			switch(can_get_address(canbuf))
+			{
+				case 0x0007:
+					result1 = can_get_data_byte(canbuf, 0);
+					result2 = can_get_data_byte(canbuf, 1);
+					//PCA0CPL0 = 0x88;
+					PCA0CPL0 = 0x88;
+					PCA0CPH0 = 0x88;
+					//PCA0CPL0 = (unsigned int)(((float)(result1<<8)+result2)*-51/182 + 255);
+					printf("%d  %d  %d\r\n", result1, result2, (unsigned int)(((float)(result1<<8)+result2)*-51/182 + 255));
+					break;
+				case 0x0008:
+					result1 = can_get_data_byte(canbuf, 0);
+					result2 = can_get_data_byte(canbuf, 1);
+					printf("%d  %d\r\n", result1, result2);
+					SFRPAGE = DAC1_PAGE;
+					DAC1L = result2*3.35;
+					DAC1H = result1*3.35;
+					SFRPAGE = 0x00;
+					break;
+				case 0x0009:
+					result1 = can_get_data_byte(canbuf, 0);
+					result2 = can_get_data_byte(canbuf, 1);
+					//printf("%d  %d\r\n", result1, result2);
+					SFRPAGE = DAC0_PAGE;
+					if(result1 == 255)
+					{
+						DAC0L = 0x00;
+						DAC0H = 0x00;
+					}
+					else
+					{
+						DAC0L = result2>>0;
+						DAC0H = result1>>0;
+					}
+					SFRPAGE = 0x00;
+					break;
+				case 0x000A:
+					//printf("LTS ");
+					if(can_get_data_byte(canbuf, 0) == 0xff)
+					{
+						P0 &= 0xEF;
+						//printf("on\r\n");
+					}
+					else
+					{
+						P0 |= 0x10;
+						//printf("off\r\n");
+					}
+					break;
+				case 0x000B:
+					//printf("RTS ");
+					if(can_get_data_byte(canbuf, 0) == 0xff)
+					{
+						P0 &= 0xDF;
+						//printf("on\r\n");
+					}
+					else
+					{
+						P0 |= 0x20;
+						//printf("off\r\n");
+					}
+					break;
+				default:
+					printf("");
+			}
+			
+			/*printf("got CAN message in!\r\n");
 			printf("ID=%04lx\r\n", can_get_address(canbuf));
 			printf("DLC=%d\r\n", can_get_dlc(canbuf));
 			printf("data0=%02x\r\n", can_get_data_byte(canbuf, 0));
@@ -161,10 +286,11 @@ void main( ) {
 			printf("data4=%02x\r\n", can_get_data_byte(canbuf, 4));
 			printf("data5=%02x\r\n", can_get_data_byte(canbuf, 5));
 			printf("data6=%02x\r\n", can_get_data_byte(canbuf, 6));
-			printf("data7=%02x\r\n", can_get_data_byte(canbuf, 7));
+			printf("data7=%02x\r\n", can_get_data_byte(canbuf, 7));*/
 			can_free_rx_buf(canbuf);
+			
 		}
-		*/
+		
 	}
 
 }
