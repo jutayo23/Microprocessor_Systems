@@ -17,6 +17,7 @@ C:   00000000  l_GSINIT1
 C:   00000000  l_GSINIT5                       
 C:   00000000  l_IABS                          
 C:   00000000  l_ISEG                          
+C:   00000000  l_OSEG                          
 C:   00000000  l_PSEG                          
 C:   00000000  l_REG_BANK_1                    
 C:   00000000  l_REG_BANK_2                    
@@ -43,19 +44,18 @@ C:   00000000  s_RSEG1
 C:   00000000  s_XABS                          
 C:   00000000  s_XISEG                         
 C:   00000000  s_XSEG                          
-C:   00000001  l_OSEG                          
 C:   00000003  l_GSFINAL                       
 C:   00000003  l_GSINIT0                       
+C:   00000006  l_HOME                          
+C:   00000006  s_GSINIT0                       
 C:   00000008  l_GSINIT                        
 C:   00000008  l_REG_BANK_0                    
 C:   00000008  s_REG_BANK_1                    
-C:   00000009  l_HOME                          
-C:   00000009  s_GSINIT0                       
+C:   00000009  s_GSINIT1                       
+C:   00000009  s_GSINIT2                       
 C:   0000000A  l_GSINIT2                       
-C:   0000000C  s_GSINIT1                       
-C:   0000000C  s_GSINIT2                       
 C:   00000010  s_REG_BANK_2                    
-C:   00000016  s_GSINIT3                       
+C:   00000013  s_GSINIT3                       
 C:   00000018  s_BIT_BANK                      
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
@@ -66,23 +66,23 @@ CABS                                00000000    00000000 =           0. bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+C:   00000018  s_OSEG                          
 C:   00000018  s_REG_BANK_3                    
+C:   00000019  s_SSEG                          
 C:   00000020  s__CODE                         
 C:   00000022  l_GSINIT3                       
 C:   0000002A  l_GSINIT4                       
-C:   0000002D  s_OSEG                          
-C:   0000002E  s_SSEG                          
-C:   00000038  s_GSINIT4                       
-C:   00000062  s_GSINIT                        
-C:   00000062  s_GSINIT5                       
-C:   0000006A  s_GSFINAL                       
-C:   0000006D  s_CSEG                          
+C:   00000035  s_GSINIT4                       
+C:   0000005F  s_GSINIT                        
+C:   0000005F  s_GSINIT5                       
+C:   00000067  s_GSFINAL                       
+C:   0000006A  s_CSEG                          
 C:   00000080  l_DSEG                          
-C:   000000D2  l_SSEG                          
+C:   000000E7  l_SSEG                          
 C:   00000100  l_IRAM                          
-C:   00000156  l_CSEG                          
-C:   000001C3  s_CONST                         
-C:   000001C3  s_XINIT                         
+C:   0000019C  l_CSEG                          
+C:   00000206  s_CONST                         
+C:   00000206  s_XINIT                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -94,55 +94,55 @@ Area                                    Addr        Size        Decimal Bytes (A
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00000000  .__.ABS.                           _startup
-     00000080  G$P0$0$0                           part3
-     00000080  G$P0_0$0$0                         part3
-     00000080  _P0                                part3
-     00000080  _P0_0                              part3
-     00000081  G$P0_1$0$0                         part3
-     00000081  G$SP$0$0                           part3
-     00000081  _P0_1                              part3
-     00000081  _SP                                part3
-     00000082  G$DPL$0$0                          part3
-     00000082  G$P0_2$0$0                         part3
-     00000082  _DPL                               part3
-     00000082  _P0_2                              part3
-     00000083  G$DPH$0$0                          part3
-     00000083  G$P0_3$0$0                         part3
-     00000083  _DPH                               part3
-     00000083  _P0_3                              part3
-     00000084  G$P0_4$0$0                         part3
-     00000084  G$SFRPAGE$0$0                      part3
-     00000084  _P0_4                              part3
-     00000084  _SFRPAGE                           part3
-     00000085  G$P0_5$0$0                         part3
-     00000085  G$SFRNEXT$0$0                      part3
-     00000085  _P0_5                              part3
-     00000085  _SFRNEXT                           part3
-     00000086  G$P0_6$0$0                         part3
-     00000086  G$SFRLAST$0$0                      part3
-     00000086  _P0_6                              part3
-     00000086  _SFRLAST                           part3
-     00000087  G$P0_7$0$0                         part3
-     00000087  G$PCON$0$0                         part3
-     00000087  _P0_7                              part3
-     00000087  _PCON                              part3
-     00000088  G$CP0HYN0$0$0                      part3
-     00000088  G$CP1HYN0$0$0                      part3
-     00000088  G$CPT0CN$0$0                       part3
-     00000088  G$CPT1CN$0$0                       part3
-     00000088  G$FLHBUSY$0$0                      part3
-     00000088  G$FLSTAT$0$0                       part3
-     00000088  G$IT0$0$0                          part3
-     00000088  G$TCON$0$0                         part3
-     00000088  _CP0HYN0                           part3
-     00000088  _CP1HYN0                           part3
-     00000088  _CPT0CN                            part3
-     00000088  _CPT1CN                            part3
-     00000088  _FLHBUSY                           part3
-     00000088  _FLSTAT                            part3
-     00000088  _IT0                               part3
-     00000088  _TCON                              part3
-     00000089  G$CP0HYN1$0$0                      part3
+     00000080  G$P0$0$0                           part4a
+     00000080  G$P0_0$0$0                         part4a
+     00000080  _P0                                part4a
+     00000080  _P0_0                              part4a
+     00000081  G$P0_1$0$0                         part4a
+     00000081  G$SP$0$0                           part4a
+     00000081  _P0_1                              part4a
+     00000081  _SP                                part4a
+     00000082  G$DPL$0$0                          part4a
+     00000082  G$P0_2$0$0                         part4a
+     00000082  _DPL                               part4a
+     00000082  _P0_2                              part4a
+     00000083  G$DPH$0$0                          part4a
+     00000083  G$P0_3$0$0                         part4a
+     00000083  _DPH                               part4a
+     00000083  _P0_3                              part4a
+     00000084  G$P0_4$0$0                         part4a
+     00000084  G$SFRPAGE$0$0                      part4a
+     00000084  _P0_4                              part4a
+     00000084  _SFRPAGE                           part4a
+     00000085  G$P0_5$0$0                         part4a
+     00000085  G$SFRNEXT$0$0                      part4a
+     00000085  _P0_5                              part4a
+     00000085  _SFRNEXT                           part4a
+     00000086  G$P0_6$0$0                         part4a
+     00000086  G$SFRLAST$0$0                      part4a
+     00000086  _P0_6                              part4a
+     00000086  _SFRLAST                           part4a
+     00000087  G$P0_7$0$0                         part4a
+     00000087  G$PCON$0$0                         part4a
+     00000087  _P0_7                              part4a
+     00000087  _PCON                              part4a
+     00000088  G$CP0HYN0$0$0                      part4a
+     00000088  G$CP1HYN0$0$0                      part4a
+     00000088  G$CPT0CN$0$0                       part4a
+     00000088  G$CPT1CN$0$0                       part4a
+     00000088  G$FLHBUSY$0$0                      part4a
+     00000088  G$FLSTAT$0$0                       part4a
+     00000088  G$IT0$0$0                          part4a
+     00000088  G$TCON$0$0                         part4a
+     00000088  _CP0HYN0                           part4a
+     00000088  _CP1HYN0                           part4a
+     00000088  _CPT0CN                            part4a
+     00000088  _CPT1CN                            part4a
+     00000088  _FLHBUSY                           part4a
+     00000088  _FLSTAT                            part4a
+     00000088  _IT0                               part4a
+     00000088  _TCON                              part4a
+     00000089  G$CP0HYN1$0$0                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
@@ -152,57 +152,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000089  G$CP1HYN1$0$0                      part3
-     00000089  G$CPT0MD$0$0                       part3
-     00000089  G$CPT1MD$0$0                       part3
-     00000089  G$IE0$0$0                          part3
-     00000089  G$PLL0CN$0$0                       part3
-     00000089  G$TMOD$0$0                         part3
-     00000089  _CP0HYN1                           part3
-     00000089  _CP1HYN1                           part3
-     00000089  _CPT0MD                            part3
-     00000089  _CPT1MD                            part3
-     00000089  _IE0                               part3
-     00000089  _PLL0CN                            part3
-     00000089  _TMOD                              part3
-     0000008A  G$CP0HYP0$0$0                      part3
-     0000008A  G$CP1HYP0$0$0                      part3
-     0000008A  G$IT1$0$0                          part3
-     0000008A  G$OSCICN$0$0                       part3
-     0000008A  G$TL0$0$0                          part3
-     0000008A  _CP0HYP0                           part3
-     0000008A  _CP1HYP0                           part3
-     0000008A  _IT1                               part3
-     0000008A  _OSCICN                            part3
-     0000008A  _TL0                               part3
-     0000008B  G$CP0HYP1$0$0                      part3
-     0000008B  G$CP1HYP1$0$0                      part3
-     0000008B  G$IE1$0$0                          part3
-     0000008B  G$OSCICL$0$0                       part3
-     0000008B  G$TL1$0$0                          part3
-     0000008B  _CP0HYP1                           part3
-     0000008B  _CP1HYP1                           part3
-     0000008B  _IE1                               part3
-     0000008B  _OSCICL                            part3
-     0000008B  _TL1                               part3
-     0000008C  G$CP0FIF$0$0                       part3
-     0000008C  G$CP1FIF$0$0                       part3
-     0000008C  G$OSCXCN$0$0                       part3
-     0000008C  G$TH0$0$0                          part3
-     0000008C  G$TR0$0$0                          part3
-     0000008C  _CP0FIF                            part3
-     0000008C  _CP1FIF                            part3
-     0000008C  _OSCXCN                            part3
-     0000008C  _TH0                               part3
-     0000008C  _TR0                               part3
-     0000008D  G$CP0RIF$0$0                       part3
-     0000008D  G$CP1RIF$0$0                       part3
-     0000008D  G$PLL0DIV$0$0                      part3
-     0000008D  G$TF0$0$0                          part3
-     0000008D  G$TH1$0$0                          part3
-     0000008D  _CP0RIF                            part3
-     0000008D  _CP1RIF                            part3
-     0000008D  _PLL0DIV                           part3
+     00000089  G$CP1HYN1$0$0                      part4a
+     00000089  G$CPT0MD$0$0                       part4a
+     00000089  G$CPT1MD$0$0                       part4a
+     00000089  G$IE0$0$0                          part4a
+     00000089  G$PLL0CN$0$0                       part4a
+     00000089  G$TMOD$0$0                         part4a
+     00000089  _CP0HYN1                           part4a
+     00000089  _CP1HYN1                           part4a
+     00000089  _CPT0MD                            part4a
+     00000089  _CPT1MD                            part4a
+     00000089  _IE0                               part4a
+     00000089  _PLL0CN                            part4a
+     00000089  _TMOD                              part4a
+     0000008A  G$CP0HYP0$0$0                      part4a
+     0000008A  G$CP1HYP0$0$0                      part4a
+     0000008A  G$IT1$0$0                          part4a
+     0000008A  G$OSCICN$0$0                       part4a
+     0000008A  G$TL0$0$0                          part4a
+     0000008A  _CP0HYP0                           part4a
+     0000008A  _CP1HYP0                           part4a
+     0000008A  _IT1                               part4a
+     0000008A  _OSCICN                            part4a
+     0000008A  _TL0                               part4a
+     0000008B  G$CP0HYP1$0$0                      part4a
+     0000008B  G$CP1HYP1$0$0                      part4a
+     0000008B  G$IE1$0$0                          part4a
+     0000008B  G$OSCICL$0$0                       part4a
+     0000008B  G$TL1$0$0                          part4a
+     0000008B  _CP0HYP1                           part4a
+     0000008B  _CP1HYP1                           part4a
+     0000008B  _IE1                               part4a
+     0000008B  _OSCICL                            part4a
+     0000008B  _TL1                               part4a
+     0000008C  G$CP0FIF$0$0                       part4a
+     0000008C  G$CP1FIF$0$0                       part4a
+     0000008C  G$OSCXCN$0$0                       part4a
+     0000008C  G$TH0$0$0                          part4a
+     0000008C  G$TR0$0$0                          part4a
+     0000008C  _CP0FIF                            part4a
+     0000008C  _CP1FIF                            part4a
+     0000008C  _OSCXCN                            part4a
+     0000008C  _TH0                               part4a
+     0000008C  _TR0                               part4a
+     0000008D  G$CP0RIF$0$0                       part4a
+     0000008D  G$CP1RIF$0$0                       part4a
+     0000008D  G$PLL0DIV$0$0                      part4a
+     0000008D  G$TF0$0$0                          part4a
+     0000008D  G$TH1$0$0                          part4a
+     0000008D  _CP0RIF                            part4a
+     0000008D  _CP1RIF                            part4a
+     0000008D  _PLL0DIV                           part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
@@ -212,57 +212,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000008D  _TF0                               part3
-     0000008D  _TH1                               part3
-     0000008E  G$CKCON$0$0                        part3
-     0000008E  G$CP0OUT$0$0                       part3
-     0000008E  G$CP1OUT$0$0                       part3
-     0000008E  G$PLL0MUL$0$0                      part3
-     0000008E  G$TR1$0$0                          part3
-     0000008E  _CKCON                             part3
-     0000008E  _CP0OUT                            part3
-     0000008E  _CP1OUT                            part3
-     0000008E  _PLL0MUL                           part3
-     0000008E  _TR1                               part3
-     0000008F  G$CP0EN$0$0                        part3
-     0000008F  G$CP1EN$0$0                        part3
-     0000008F  G$PLL0FLT$0$0                      part3
-     0000008F  G$PSCTL$0$0                        part3
-     0000008F  G$TF1$0$0                          part3
-     0000008F  _CP0EN                             part3
-     0000008F  _CP1EN                             part3
-     0000008F  _PLL0FLT                           part3
-     0000008F  _PSCTL                             part3
-     0000008F  _TF1                               part3
-     00000090  G$P1$0$0                           part3
-     00000090  G$P1_0$0$0                         part3
-     00000090  _P1                                part3
-     00000090  _P1_0                              part3
-     00000091  G$MAC0BL$0$0                       part3
-     00000091  G$P1_1$0$0                         part3
-     00000091  G$SSTA0$0$0                        part3
-     00000091  _MAC0BL                            part3
-     00000091  _P1_1                              part3
-     00000091  _SSTA0                             part3
-     00000092  G$MAC0BH$0$0                       part3
-     00000092  G$P1_2$0$0                         part3
-     00000092  _MAC0BH                            part3
-     00000092  _P1_2                              part3
-     00000093  G$MAC0ACC0$0$0                     part3
-     00000093  G$P1_3$0$0                         part3
-     00000093  _MAC0ACC0                          part3
-     00000093  _P1_3                              part3
-     00000094  G$MAC0ACC1$0$0                     part3
-     00000094  G$P1_4$0$0                         part3
-     00000094  _MAC0ACC1                          part3
-     00000094  _P1_4                              part3
-     00000095  G$MAC0ACC2$0$0                     part3
-     00000095  G$P1_5$0$0                         part3
-     00000095  _MAC0ACC2                          part3
-     00000095  _P1_5                              part3
-     00000096  G$MAC0ACC3$0$0                     part3
-     00000096  G$P1_6$0$0                         part3
-     00000096  G$SFRPGCN$0$0                      part3
+     0000008D  _TF0                               part4a
+     0000008D  _TH1                               part4a
+     0000008E  G$CKCON$0$0                        part4a
+     0000008E  G$CP0OUT$0$0                       part4a
+     0000008E  G$CP1OUT$0$0                       part4a
+     0000008E  G$PLL0MUL$0$0                      part4a
+     0000008E  G$TR1$0$0                          part4a
+     0000008E  _CKCON                             part4a
+     0000008E  _CP0OUT                            part4a
+     0000008E  _CP1OUT                            part4a
+     0000008E  _PLL0MUL                           part4a
+     0000008E  _TR1                               part4a
+     0000008F  G$CP0EN$0$0                        part4a
+     0000008F  G$CP1EN$0$0                        part4a
+     0000008F  G$PLL0FLT$0$0                      part4a
+     0000008F  G$PSCTL$0$0                        part4a
+     0000008F  G$TF1$0$0                          part4a
+     0000008F  _CP0EN                             part4a
+     0000008F  _CP1EN                             part4a
+     0000008F  _PLL0FLT                           part4a
+     0000008F  _PSCTL                             part4a
+     0000008F  _TF1                               part4a
+     00000090  G$P1$0$0                           part4a
+     00000090  G$P1_0$0$0                         part4a
+     00000090  _P1                                part4a
+     00000090  _P1_0                              part4a
+     00000091  G$MAC0BL$0$0                       part4a
+     00000091  G$P1_1$0$0                         part4a
+     00000091  G$SSTA0$0$0                        part4a
+     00000091  _MAC0BL                            part4a
+     00000091  _P1_1                              part4a
+     00000091  _SSTA0                             part4a
+     00000092  G$MAC0BH$0$0                       part4a
+     00000092  G$P1_2$0$0                         part4a
+     00000092  _MAC0BH                            part4a
+     00000092  _P1_2                              part4a
+     00000093  G$MAC0ACC0$0$0                     part4a
+     00000093  G$P1_3$0$0                         part4a
+     00000093  _MAC0ACC0                          part4a
+     00000093  _P1_3                              part4a
+     00000094  G$MAC0ACC1$0$0                     part4a
+     00000094  G$P1_4$0$0                         part4a
+     00000094  _MAC0ACC1                          part4a
+     00000094  _P1_4                              part4a
+     00000095  G$MAC0ACC2$0$0                     part4a
+     00000095  G$P1_5$0$0                         part4a
+     00000095  _MAC0ACC2                          part4a
+     00000095  _P1_5                              part4a
+     00000096  G$MAC0ACC3$0$0                     part4a
+     00000096  G$P1_6$0$0                         part4a
+     00000096  G$SFRPGCN$0$0                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
@@ -272,57 +272,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000096  _MAC0ACC3                          part3
-     00000096  _P1_6                              part3
-     00000096  _SFRPGCN                           part3
-     00000097  G$CLKSEL$0$0                       part3
-     00000097  G$MAC0OVR$0$0                      part3
-     00000097  G$P1_7$0$0                         part3
-     00000097  _CLKSEL                            part3
-     00000097  _MAC0OVR                           part3
-     00000097  _P1_7                              part3
-     00000098  G$RI$0$0                           part3
-     00000098  G$RI0$0$0                          part3
-     00000098  G$RI1$0$0                          part3
-     00000098  G$SCON$0$0                         part3
-     00000098  G$SCON0$0$0                        part3
-     00000098  G$SCON1$0$0                        part3
-     00000098  _RI                                part3
-     00000098  _RI0                               part3
-     00000098  _RI1                               part3
-     00000098  _SCON                              part3
-     00000098  _SCON0                             part3
-     00000098  _SCON1                             part3
-     00000099  G$SBUF$0$0                         part3
-     00000099  G$SBUF0$0$0                        part3
-     00000099  G$SBUF1$0$0                        part3
-     00000099  G$TI$0$0                           part3
-     00000099  G$TI0$0$0                          part3
-     00000099  G$TI1$0$0                          part3
-     00000099  _SBUF                              part3
-     00000099  _SBUF0                             part3
-     00000099  _SBUF1                             part3
-     00000099  _TI                                part3
-     00000099  _TI0                               part3
-     00000099  _TI1                               part3
-     0000009A  G$CCH0MA$0$0                       part3
-     0000009A  G$RB80$0$0                         part3
-     0000009A  G$RB81$0$0                         part3
-     0000009A  G$SPI0CFG$0$0                      part3
-     0000009A  _CCH0MA                            part3
-     0000009A  _RB80                              part3
-     0000009A  _RB81                              part3
-     0000009A  _SPI0CFG                           part3
-     0000009B  G$SPI0DAT$0$0                      part3
-     0000009B  G$TB80$0$0                         part3
-     0000009B  G$TB81$0$0                         part3
-     0000009B  _SPI0DAT                           part3
-     0000009B  _TB80                              part3
-     0000009B  _TB81                              part3
-     0000009C  G$P4MDOUT$0$0                      part3
-     0000009C  G$REN$0$0                          part3
-     0000009C  G$REN0$0$0                         part3
-     0000009C  G$REN1$0$0                         part3
+     00000096  _MAC0ACC3                          part4a
+     00000096  _P1_6                              part4a
+     00000096  _SFRPGCN                           part4a
+     00000097  G$CLKSEL$0$0                       part4a
+     00000097  G$MAC0OVR$0$0                      part4a
+     00000097  G$P1_7$0$0                         part4a
+     00000097  _CLKSEL                            part4a
+     00000097  _MAC0OVR                           part4a
+     00000097  _P1_7                              part4a
+     00000098  G$RI$0$0                           part4a
+     00000098  G$RI0$0$0                          part4a
+     00000098  G$RI1$0$0                          part4a
+     00000098  G$SCON$0$0                         part4a
+     00000098  G$SCON0$0$0                        part4a
+     00000098  G$SCON1$0$0                        part4a
+     00000098  _RI                                part4a
+     00000098  _RI0                               part4a
+     00000098  _RI1                               part4a
+     00000098  _SCON                              part4a
+     00000098  _SCON0                             part4a
+     00000098  _SCON1                             part4a
+     00000099  G$SBUF$0$0                         part4a
+     00000099  G$SBUF0$0$0                        part4a
+     00000099  G$SBUF1$0$0                        part4a
+     00000099  G$TI$0$0                           part4a
+     00000099  G$TI0$0$0                          part4a
+     00000099  G$TI1$0$0                          part4a
+     00000099  _SBUF                              part4a
+     00000099  _SBUF0                             part4a
+     00000099  _SBUF1                             part4a
+     00000099  _TI                                part4a
+     00000099  _TI0                               part4a
+     00000099  _TI1                               part4a
+     0000009A  G$CCH0MA$0$0                       part4a
+     0000009A  G$RB80$0$0                         part4a
+     0000009A  G$RB81$0$0                         part4a
+     0000009A  G$SPI0CFG$0$0                      part4a
+     0000009A  _CCH0MA                            part4a
+     0000009A  _RB80                              part4a
+     0000009A  _RB81                              part4a
+     0000009A  _SPI0CFG                           part4a
+     0000009B  G$SPI0DAT$0$0                      part4a
+     0000009B  G$TB80$0$0                         part4a
+     0000009B  G$TB81$0$0                         part4a
+     0000009B  _SPI0DAT                           part4a
+     0000009B  _TB80                              part4a
+     0000009B  _TB81                              part4a
+     0000009C  G$P4MDOUT$0$0                      part4a
+     0000009C  G$REN$0$0                          part4a
+     0000009C  G$REN0$0$0                         part4a
+     0000009C  G$REN1$0$0                         part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
@@ -332,57 +332,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000009C  _P4MDOUT                           part3
-     0000009C  _REN                               part3
-     0000009C  _REN0                              part3
-     0000009C  _REN1                              part3
-     0000009D  G$MCE1$0$0                         part3
-     0000009D  G$P5MDOUT$0$0                      part3
-     0000009D  G$SM20$0$0                         part3
-     0000009D  G$SPI0CKR$0$0                      part3
-     0000009D  _MCE1                              part3
-     0000009D  _P5MDOUT                           part3
-     0000009D  _SM20                              part3
-     0000009D  _SPI0CKR                           part3
-     0000009E  G$P6MDOUT$0$0                      part3
-     0000009E  G$SM10$0$0                         part3
-     0000009E  _P6MDOUT                           part3
-     0000009E  _SM10                              part3
-     0000009F  G$P7MDOUT$0$0                      part3
-     0000009F  G$S1MODE$0$0                       part3
-     0000009F  G$SM00$0$0                         part3
-     0000009F  _P7MDOUT                           part3
-     0000009F  _S1MODE                            part3
-     0000009F  _SM00                              part3
-     000000A0  G$P2$0$0                           part3
-     000000A0  G$P2_0$0$0                         part3
-     000000A0  _P2                                part3
-     000000A0  _P2_0                              part3
-     000000A1  G$CCH0CN$0$0                       part3
-     000000A1  G$EMI0TC$0$0                       part3
-     000000A1  G$P2_1$0$0                         part3
-     000000A1  _CCH0CN                            part3
-     000000A1  _EMI0TC                            part3
-     000000A1  _P2_1                              part3
-     000000A2  G$CCH0TN$0$0                       part3
-     000000A2  G$EMI0CN$0$0                       part3
-     000000A2  G$P2_2$0$0                         part3
-     000000A2  G$_XPAGE$0$0                       part3
-     000000A2  _CCH0TN                            part3
-     000000A2  _EMI0CN                            part3
-     000000A2  _P2_2                              part3
-     000000A2  __XPAGE                            part3
-     000000A3  G$CCH0LC$0$0                       part3
-     000000A3  G$EMI0CF$0$0                       part3
-     000000A3  G$P2_3$0$0                         part3
-     000000A3  _CCH0LC                            part3
-     000000A3  _EMI0CF                            part3
-     000000A3  _P2_3                              part3
-     000000A4  G$P0MDOUT$0$0                      part3
-     000000A4  G$P2_4$0$0                         part3
-     000000A4  _P0MDOUT                           part3
-     000000A4  _P2_4                              part3
-     000000A5  G$P1MDOUT$0$0                      part3
+     0000009C  _P4MDOUT                           part4a
+     0000009C  _REN                               part4a
+     0000009C  _REN0                              part4a
+     0000009C  _REN1                              part4a
+     0000009D  G$MCE1$0$0                         part4a
+     0000009D  G$P5MDOUT$0$0                      part4a
+     0000009D  G$SM20$0$0                         part4a
+     0000009D  G$SPI0CKR$0$0                      part4a
+     0000009D  _MCE1                              part4a
+     0000009D  _P5MDOUT                           part4a
+     0000009D  _SM20                              part4a
+     0000009D  _SPI0CKR                           part4a
+     0000009E  G$P6MDOUT$0$0                      part4a
+     0000009E  G$SM10$0$0                         part4a
+     0000009E  _P6MDOUT                           part4a
+     0000009E  _SM10                              part4a
+     0000009F  G$P7MDOUT$0$0                      part4a
+     0000009F  G$S1MODE$0$0                       part4a
+     0000009F  G$SM00$0$0                         part4a
+     0000009F  _P7MDOUT                           part4a
+     0000009F  _S1MODE                            part4a
+     0000009F  _SM00                              part4a
+     000000A0  G$P2$0$0                           part4a
+     000000A0  G$P2_0$0$0                         part4a
+     000000A0  _P2                                part4a
+     000000A0  _P2_0                              part4a
+     000000A1  G$CCH0CN$0$0                       part4a
+     000000A1  G$EMI0TC$0$0                       part4a
+     000000A1  G$P2_1$0$0                         part4a
+     000000A1  _CCH0CN                            part4a
+     000000A1  _EMI0TC                            part4a
+     000000A1  _P2_1                              part4a
+     000000A2  G$CCH0TN$0$0                       part4a
+     000000A2  G$EMI0CN$0$0                       part4a
+     000000A2  G$P2_2$0$0                         part4a
+     000000A2  G$_XPAGE$0$0                       part4a
+     000000A2  _CCH0TN                            part4a
+     000000A2  _EMI0CN                            part4a
+     000000A2  _P2_2                              part4a
+     000000A2  __XPAGE                            part4a
+     000000A3  G$CCH0LC$0$0                       part4a
+     000000A3  G$EMI0CF$0$0                       part4a
+     000000A3  G$P2_3$0$0                         part4a
+     000000A3  _CCH0LC                            part4a
+     000000A3  _EMI0CF                            part4a
+     000000A3  _P2_3                              part4a
+     000000A4  G$P0MDOUT$0$0                      part4a
+     000000A4  G$P2_4$0$0                         part4a
+     000000A4  _P0MDOUT                           part4a
+     000000A4  _P2_4                              part4a
+     000000A5  G$P1MDOUT$0$0                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
@@ -392,57 +392,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000A5  G$P2_5$0$0                         part3
-     000000A5  _P1MDOUT                           part3
-     000000A5  _P2_5                              part3
-     000000A6  G$P2MDOUT$0$0                      part3
-     000000A6  G$P2_6$0$0                         part3
-     000000A6  _P2MDOUT                           part3
-     000000A6  _P2_6                              part3
-     000000A7  G$P2_7$0$0                         part3
-     000000A7  G$P3MDOUT$0$0                      part3
-     000000A7  _P2_7                              part3
-     000000A7  _P3MDOUT                           part3
-     000000A8  G$EX0$0$0                          part3
-     000000A8  G$IE$0$0                           part3
-     000000A8  _EX0                               part3
-     000000A8  _IE                                part3
-     000000A9  G$ET0$0$0                          part3
-     000000A9  G$SADDR0$0$0                       part3
-     000000A9  _ET0                               part3
-     000000A9  _SADDR0                            part3
-     000000AA  G$EX1$0$0                          part3
-     000000AA  _EX1                               part3
-     000000AB  G$ET1$0$0                          part3
-     000000AB  _ET1                               part3
-     000000AC  G$ES$0$0                           part3
-     000000AC  G$ES0$0$0                          part3
-     000000AC  _ES                                part3
-     000000AC  _ES0                               part3
-     000000AD  G$ET2$0$0                          part3
-     000000AD  G$P1MDIN$0$0                       part3
-     000000AD  _ET2                               part3
-     000000AD  _P1MDIN                            part3
-     000000AF  G$EA$0$0                           part3
-     000000AF  _EA                                part3
-     000000B0  G$P3$0$0                           part3
-     000000B0  G$P3_0$0$0                         part3
-     000000B0  _P3                                part3
-     000000B0  _P3_0                              part3
-     000000B1  G$P3_1$0$0                         part3
-     000000B1  G$PSBANK$0$0                       part3
-     000000B1  _P3_1                              part3
-     000000B1  _PSBANK                            part3
-     000000B2  G$P3_2$0$0                         part3
-     000000B2  _P3_2                              part3
-     000000B3  G$P3_3$0$0                         part3
-     000000B3  _P3_3                              part3
-     000000B4  G$P3_4$0$0                         part3
-     000000B4  _P3_4                              part3
-     000000B5  G$P3_5$0$0                         part3
-     000000B5  _P3_5                              part3
-     000000B6  G$P3_6$0$0                         part3
-     000000B6  _P3_6                              part3
+     000000A5  G$P2_5$0$0                         part4a
+     000000A5  _P1MDOUT                           part4a
+     000000A5  _P2_5                              part4a
+     000000A6  G$P2MDOUT$0$0                      part4a
+     000000A6  G$P2_6$0$0                         part4a
+     000000A6  _P2MDOUT                           part4a
+     000000A6  _P2_6                              part4a
+     000000A7  G$P2_7$0$0                         part4a
+     000000A7  G$P3MDOUT$0$0                      part4a
+     000000A7  _P2_7                              part4a
+     000000A7  _P3MDOUT                           part4a
+     000000A8  G$EX0$0$0                          part4a
+     000000A8  G$IE$0$0                           part4a
+     000000A8  _EX0                               part4a
+     000000A8  _IE                                part4a
+     000000A9  G$ET0$0$0                          part4a
+     000000A9  G$SADDR0$0$0                       part4a
+     000000A9  _ET0                               part4a
+     000000A9  _SADDR0                            part4a
+     000000AA  G$EX1$0$0                          part4a
+     000000AA  _EX1                               part4a
+     000000AB  G$ET1$0$0                          part4a
+     000000AB  _ET1                               part4a
+     000000AC  G$ES$0$0                           part4a
+     000000AC  G$ES0$0$0                          part4a
+     000000AC  _ES                                part4a
+     000000AC  _ES0                               part4a
+     000000AD  G$ET2$0$0                          part4a
+     000000AD  G$P1MDIN$0$0                       part4a
+     000000AD  _ET2                               part4a
+     000000AD  _P1MDIN                            part4a
+     000000AF  G$EA$0$0                           part4a
+     000000AF  _EA                                part4a
+     000000B0  G$P3$0$0                           part4a
+     000000B0  G$P3_0$0$0                         part4a
+     000000B0  _P3                                part4a
+     000000B0  _P3_0                              part4a
+     000000B1  G$P3_1$0$0                         part4a
+     000000B1  G$PSBANK$0$0                       part4a
+     000000B1  _P3_1                              part4a
+     000000B1  _PSBANK                            part4a
+     000000B2  G$P3_2$0$0                         part4a
+     000000B2  _P3_2                              part4a
+     000000B3  G$P3_3$0$0                         part4a
+     000000B3  _P3_3                              part4a
+     000000B4  G$P3_4$0$0                         part4a
+     000000B4  _P3_4                              part4a
+     000000B5  G$P3_5$0$0                         part4a
+     000000B5  _P3_5                              part4a
+     000000B6  G$P3_6$0$0                         part4a
+     000000B6  _P3_6                              part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 Hexadecimal  [32-Bits]
 
@@ -452,57 +452,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000B7  G$FLACL$0$0                        part3
-     000000B7  G$FLSCL$0$0                        part3
-     000000B7  G$P3_7$0$0                         part3
-     000000B7  _FLACL                             part3
-     000000B7  _FLSCL                             part3
-     000000B7  _P3_7                              part3
-     000000B8  G$IP$0$0                           part3
-     000000B8  G$PX0$0$0                          part3
-     000000B8  _IP                                part3
-     000000B8  _PX0                               part3
-     000000B9  G$PT0$0$0                          part3
-     000000B9  G$SADEN0$0$0                       part3
-     000000B9  _PT0                               part3
-     000000B9  _SADEN0                            part3
-     000000BA  G$AMX0CF$0$0                       part3
-     000000BA  G$AMX2CF$0$0                       part3
-     000000BA  G$PX1$0$0                          part3
-     000000BA  _AMX0CF                            part3
-     000000BA  _AMX2CF                            part3
-     000000BA  _PX1                               part3
-     000000BB  G$AMX0SL$0$0                       part3
-     000000BB  G$AMX2SL$0$0                       part3
-     000000BB  G$PT1$0$0                          part3
-     000000BB  _AMX0SL                            part3
-     000000BB  _AMX2SL                            part3
-     000000BB  _PT1                               part3
-     000000BC  G$ADC0CF$0$0                       part3
-     000000BC  G$ADC2CF$0$0                       part3
-     000000BC  G$PS$0$0                           part3
-     000000BC  G$PS0$0$0                          part3
-     000000BC  _ADC0CF                            part3
-     000000BC  _ADC2CF                            part3
-     000000BC  _PS                                part3
-     000000BC  _PS0                               part3
-     000000BD  G$PT2$0$0                          part3
-     000000BD  _PT2                               part3
-     000000BE  G$ADC0L$0$0                        part3
-     000000BE  G$ADC2$0$0                         part3
-     000000BE  _ADC0L                             part3
-     000000BE  _ADC2                              part3
-     000000BF  G$ADC0H$0$0                        part3
-     000000BF  _ADC0H                             part3
-     000000C0  G$MAC0N$0$0                        part3
-     000000C0  G$MAC0STA$0$0                      part3
-     000000C0  G$SMB0CN$0$0                       part3
-     000000C0  G$SMBTOE$0$0                       part3
-     000000C0  _MAC0N                             part3
-     000000C0  _MAC0STA                           part3
-     000000C0  _SMB0CN                            part3
-     000000C0  _SMBTOE                            part3
-     000000C1  G$MAC0AL$0$0                       part3
+     000000B7  G$FLACL$0$0                        part4a
+     000000B7  G$FLSCL$0$0                        part4a
+     000000B7  G$P3_7$0$0                         part4a
+     000000B7  _FLACL                             part4a
+     000000B7  _FLSCL                             part4a
+     000000B7  _P3_7                              part4a
+     000000B8  G$IP$0$0                           part4a
+     000000B8  G$PX0$0$0                          part4a
+     000000B8  _IP                                part4a
+     000000B8  _PX0                               part4a
+     000000B9  G$PT0$0$0                          part4a
+     000000B9  G$SADEN0$0$0                       part4a
+     000000B9  _PT0                               part4a
+     000000B9  _SADEN0                            part4a
+     000000BA  G$AMX0CF$0$0                       part4a
+     000000BA  G$AMX2CF$0$0                       part4a
+     000000BA  G$PX1$0$0                          part4a
+     000000BA  _AMX0CF                            part4a
+     000000BA  _AMX2CF                            part4a
+     000000BA  _PX1                               part4a
+     000000BB  G$AMX0SL$0$0                       part4a
+     000000BB  G$AMX2SL$0$0                       part4a
+     000000BB  G$PT1$0$0                          part4a
+     000000BB  _AMX0SL                            part4a
+     000000BB  _AMX2SL                            part4a
+     000000BB  _PT1                               part4a
+     000000BC  G$ADC0CF$0$0                       part4a
+     000000BC  G$ADC2CF$0$0                       part4a
+     000000BC  G$PS$0$0                           part4a
+     000000BC  G$PS0$0$0                          part4a
+     000000BC  _ADC0CF                            part4a
+     000000BC  _ADC2CF                            part4a
+     000000BC  _PS                                part4a
+     000000BC  _PS0                               part4a
+     000000BD  G$PT2$0$0                          part4a
+     000000BD  _PT2                               part4a
+     000000BE  G$ADC0L$0$0                        part4a
+     000000BE  G$ADC2$0$0                         part4a
+     000000BE  _ADC0L                             part4a
+     000000BE  _ADC2                              part4a
+     000000BF  G$ADC0H$0$0                        part4a
+     000000BF  _ADC0H                             part4a
+     000000C0  G$MAC0N$0$0                        part4a
+     000000C0  G$MAC0STA$0$0                      part4a
+     000000C0  G$SMB0CN$0$0                       part4a
+     000000C0  G$SMBTOE$0$0                       part4a
+     000000C0  _MAC0N                             part4a
+     000000C0  _MAC0STA                           part4a
+     000000C0  _SMB0CN                            part4a
+     000000C0  _SMBTOE                            part4a
+     000000C1  G$MAC0AL$0$0                       part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
@@ -512,57 +512,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000C1  G$MAC0SO$0$0                       part3
-     000000C1  G$SMB0STA$0$0                      part3
-     000000C1  G$SMBFTE$0$0                       part3
-     000000C1  _MAC0AL                            part3
-     000000C1  _MAC0SO                            part3
-     000000C1  _SMB0STA                           part3
-     000000C1  _SMBFTE                            part3
-     000000C2  G$AA$0$0                           part3
-     000000C2  G$MAC0AH$0$0                       part3
-     000000C2  G$MAC0Z$0$0                        part3
-     000000C2  G$SMB0DAT$0$0                      part3
-     000000C2  _AA                                part3
-     000000C2  _MAC0AH                            part3
-     000000C2  _MAC0Z                             part3
-     000000C2  _SMB0DAT                           part3
-     000000C3  G$MAC0CF$0$0                       part3
-     000000C3  G$MAC0HO$0$0                       part3
-     000000C3  G$SI$0$0                           part3
-     000000C3  G$SMB0ADR$0$0                      part3
-     000000C3  _MAC0CF                            part3
-     000000C3  _MAC0HO                            part3
-     000000C3  _SI                                part3
-     000000C3  _SMB0ADR                           part3
-     000000C4  G$ADC0GTL$0$0                      part3
-     000000C4  G$ADC2GT$0$0                       part3
-     000000C4  G$STO$0$0                          part3
-     000000C4  _ADC0GTL                           part3
-     000000C4  _ADC2GT                            part3
-     000000C4  _STO                               part3
-     000000C5  G$ADC0GTH$0$0                      part3
-     000000C5  G$STA$0$0                          part3
-     000000C5  _ADC0GTH                           part3
-     000000C5  _STA                               part3
-     000000C6  G$ADC0LTL$0$0                      part3
-     000000C6  G$ADC2LT$0$0                       part3
-     000000C6  G$ENSMB$0$0                        part3
-     000000C6  _ADC0LTL                           part3
-     000000C6  _ADC2LT                            part3
-     000000C6  _ENSMB                             part3
-     000000C7  G$ADC0LTH$0$0                      part3
-     000000C7  G$BUSY$0$0                         part3
-     000000C7  _ADC0LTH                           part3
-     000000C7  _BUSY                              part3
-     000000C8  G$CPRL2$0$0                        part3
-     000000C8  G$CPRL3$0$0                        part3
-     000000C8  G$CPRL4$0$0                        part3
-     000000C8  G$P4$0$0                           part3
-     000000C8  G$P4_0$0$0                         part3
-     000000C8  G$TMR2CN$0$0                       part3
-     000000C8  G$TMR3CN$0$0                       part3
-     000000C8  G$TMR4CN$0$0                       part3
+     000000C1  G$MAC0SO$0$0                       part4a
+     000000C1  G$SMB0STA$0$0                      part4a
+     000000C1  G$SMBFTE$0$0                       part4a
+     000000C1  _MAC0AL                            part4a
+     000000C1  _MAC0SO                            part4a
+     000000C1  _SMB0STA                           part4a
+     000000C1  _SMBFTE                            part4a
+     000000C2  G$AA$0$0                           part4a
+     000000C2  G$MAC0AH$0$0                       part4a
+     000000C2  G$MAC0Z$0$0                        part4a
+     000000C2  G$SMB0DAT$0$0                      part4a
+     000000C2  _AA                                part4a
+     000000C2  _MAC0AH                            part4a
+     000000C2  _MAC0Z                             part4a
+     000000C2  _SMB0DAT                           part4a
+     000000C3  G$MAC0CF$0$0                       part4a
+     000000C3  G$MAC0HO$0$0                       part4a
+     000000C3  G$SI$0$0                           part4a
+     000000C3  G$SMB0ADR$0$0                      part4a
+     000000C3  _MAC0CF                            part4a
+     000000C3  _MAC0HO                            part4a
+     000000C3  _SI                                part4a
+     000000C3  _SMB0ADR                           part4a
+     000000C4  G$ADC0GTL$0$0                      part4a
+     000000C4  G$ADC2GT$0$0                       part4a
+     000000C4  G$STO$0$0                          part4a
+     000000C4  _ADC0GTL                           part4a
+     000000C4  _ADC2GT                            part4a
+     000000C4  _STO                               part4a
+     000000C5  G$ADC0GTH$0$0                      part4a
+     000000C5  G$STA$0$0                          part4a
+     000000C5  _ADC0GTH                           part4a
+     000000C5  _STA                               part4a
+     000000C6  G$ADC0LTL$0$0                      part4a
+     000000C6  G$ADC2LT$0$0                       part4a
+     000000C6  G$ENSMB$0$0                        part4a
+     000000C6  _ADC0LTL                           part4a
+     000000C6  _ADC2LT                            part4a
+     000000C6  _ENSMB                             part4a
+     000000C7  G$ADC0LTH$0$0                      part4a
+     000000C7  G$BUSY$0$0                         part4a
+     000000C7  _ADC0LTH                           part4a
+     000000C7  _BUSY                              part4a
+     000000C8  G$CPRL2$0$0                        part4a
+     000000C8  G$CPRL3$0$0                        part4a
+     000000C8  G$CPRL4$0$0                        part4a
+     000000C8  G$P4$0$0                           part4a
+     000000C8  G$P4_0$0$0                         part4a
+     000000C8  G$TMR2CN$0$0                       part4a
+     000000C8  G$TMR3CN$0$0                       part4a
+     000000C8  G$TMR4CN$0$0                       part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
@@ -572,57 +572,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000C8  _CPRL2                             part3
-     000000C8  _CPRL3                             part3
-     000000C8  _CPRL4                             part3
-     000000C8  _P4                                part3
-     000000C8  _P4_0                              part3
-     000000C8  _TMR2CN                            part3
-     000000C8  _TMR3CN                            part3
-     000000C8  _TMR4CN                            part3
-     000000C9  G$CT2$0$0                          part3
-     000000C9  G$CT3$0$0                          part3
-     000000C9  G$CT4$0$0                          part3
-     000000C9  G$P4_1$0$0                         part3
-     000000C9  G$TMR2CF$0$0                       part3
-     000000C9  G$TMR3CF$0$0                       part3
-     000000C9  G$TMR4CF$0$0                       part3
-     000000C9  _CT2                               part3
-     000000C9  _CT3                               part3
-     000000C9  _CT4                               part3
-     000000C9  _P4_1                              part3
-     000000C9  _TMR2CF                            part3
-     000000C9  _TMR3CF                            part3
-     000000C9  _TMR4CF                            part3
-     000000CA  G$P4_2$0$0                         part3
-     000000CA  G$RCAP2L$0$0                       part3
-     000000CA  G$RCAP3L$0$0                       part3
-     000000CA  G$RCAP4L$0$0                       part3
-     000000CA  G$TR2$0$0                          part3
-     000000CA  G$TR3$0$0                          part3
-     000000CA  G$TR4$0$0                          part3
-     000000CA  _P4_2                              part3
-     000000CA  _RCAP2L                            part3
-     000000CA  _RCAP3L                            part3
-     000000CA  _RCAP4L                            part3
-     000000CA  _TR2                               part3
-     000000CA  _TR3                               part3
-     000000CA  _TR4                               part3
-     000000CB  G$EXEN2$0$0                        part3
-     000000CB  G$EXEN3$0$0                        part3
-     000000CB  G$EXEN4$0$0                        part3
-     000000CB  G$P4_3$0$0                         part3
-     000000CB  G$RCAP2H$0$0                       part3
-     000000CB  G$RCAP3H$0$0                       part3
-     000000CB  G$RCAP4H$0$0                       part3
-     000000CB  _EXEN2                             part3
-     000000CB  _EXEN3                             part3
-     000000CB  _EXEN4                             part3
-     000000CB  _P4_3                              part3
-     000000CB  _RCAP2H                            part3
-     000000CB  _RCAP3H                            part3
-     000000CB  _RCAP4H                            part3
-     000000CC  G$P4_4$0$0                         part3
+     000000C8  _CPRL2                             part4a
+     000000C8  _CPRL3                             part4a
+     000000C8  _CPRL4                             part4a
+     000000C8  _P4                                part4a
+     000000C8  _P4_0                              part4a
+     000000C8  _TMR2CN                            part4a
+     000000C8  _TMR3CN                            part4a
+     000000C8  _TMR4CN                            part4a
+     000000C9  G$CT2$0$0                          part4a
+     000000C9  G$CT3$0$0                          part4a
+     000000C9  G$CT4$0$0                          part4a
+     000000C9  G$P4_1$0$0                         part4a
+     000000C9  G$TMR2CF$0$0                       part4a
+     000000C9  G$TMR3CF$0$0                       part4a
+     000000C9  G$TMR4CF$0$0                       part4a
+     000000C9  _CT2                               part4a
+     000000C9  _CT3                               part4a
+     000000C9  _CT4                               part4a
+     000000C9  _P4_1                              part4a
+     000000C9  _TMR2CF                            part4a
+     000000C9  _TMR3CF                            part4a
+     000000C9  _TMR4CF                            part4a
+     000000CA  G$P4_2$0$0                         part4a
+     000000CA  G$RCAP2L$0$0                       part4a
+     000000CA  G$RCAP3L$0$0                       part4a
+     000000CA  G$RCAP4L$0$0                       part4a
+     000000CA  G$TR2$0$0                          part4a
+     000000CA  G$TR3$0$0                          part4a
+     000000CA  G$TR4$0$0                          part4a
+     000000CA  _P4_2                              part4a
+     000000CA  _RCAP2L                            part4a
+     000000CA  _RCAP3L                            part4a
+     000000CA  _RCAP4L                            part4a
+     000000CA  _TR2                               part4a
+     000000CA  _TR3                               part4a
+     000000CA  _TR4                               part4a
+     000000CB  G$EXEN2$0$0                        part4a
+     000000CB  G$EXEN3$0$0                        part4a
+     000000CB  G$EXEN4$0$0                        part4a
+     000000CB  G$P4_3$0$0                         part4a
+     000000CB  G$RCAP2H$0$0                       part4a
+     000000CB  G$RCAP3H$0$0                       part4a
+     000000CB  G$RCAP4H$0$0                       part4a
+     000000CB  _EXEN2                             part4a
+     000000CB  _EXEN3                             part4a
+     000000CB  _EXEN4                             part4a
+     000000CB  _P4_3                              part4a
+     000000CB  _RCAP2H                            part4a
+     000000CB  _RCAP3H                            part4a
+     000000CB  _RCAP4H                            part4a
+     000000CC  G$P4_4$0$0                         part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
@@ -632,57 +632,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000CC  G$TL2$0$0                          part3
-     000000CC  G$TMR2L$0$0                        part3
-     000000CC  G$TMR3L$0$0                        part3
-     000000CC  G$TMR4L$0$0                        part3
-     000000CC  _P4_4                              part3
-     000000CC  _TL2                               part3
-     000000CC  _TMR2L                             part3
-     000000CC  _TMR3L                             part3
-     000000CC  _TMR4L                             part3
-     000000CD  G$P4_5$0$0                         part3
-     000000CD  G$TH2$0$0                          part3
-     000000CD  G$TMR2H$0$0                        part3
-     000000CD  G$TMR3H$0$0                        part3
-     000000CD  G$TMR4H$0$0                        part3
-     000000CD  _P4_5                              part3
-     000000CD  _TH2                               part3
-     000000CD  _TMR2H                             part3
-     000000CD  _TMR3H                             part3
-     000000CD  _TMR4H                             part3
-     000000CE  G$EXF2$0$0                         part3
-     000000CE  G$EXF3$0$0                         part3
-     000000CE  G$EXF4$0$0                         part3
-     000000CE  G$MAC0RNDL$0$0                     part3
-     000000CE  G$P4_6$0$0                         part3
-     000000CE  _EXF2                              part3
-     000000CE  _EXF3                              part3
-     000000CE  _EXF4                              part3
-     000000CE  _MAC0RNDL                          part3
-     000000CE  _P4_6                              part3
-     000000CF  G$MAC0RNDH$0$0                     part3
-     000000CF  G$P4_7$0$0                         part3
-     000000CF  G$SMB0CR$0$0                       part3
-     000000CF  G$TF2$0$0                          part3
-     000000CF  G$TF3$0$0                          part3
-     000000CF  G$TF4$0$0                          part3
-     000000CF  _MAC0RNDH                          part3
-     000000CF  _P4_7                              part3
-     000000CF  _SMB0CR                            part3
-     000000CF  _TF2                               part3
-     000000CF  _TF3                               part3
-     000000CF  _TF4                               part3
-     000000D0  G$P$0$0                            part3
-     000000D0  G$PSW$0$0                          part3
-     000000D0  _P                                 part3
-     000000D0  _PSW                               part3
-     000000D1  G$F1$0$0                           part3
-     000000D1  G$REF0CN$0$0                       part3
-     000000D1  _F1                                part3
-     000000D1  _REF0CN                            part3
-     000000D2  G$DAC0L$0$0                        part3
-     000000D2  G$DAC1L$0$0                        part3
+     000000CC  G$TL2$0$0                          part4a
+     000000CC  G$TMR2L$0$0                        part4a
+     000000CC  G$TMR3L$0$0                        part4a
+     000000CC  G$TMR4L$0$0                        part4a
+     000000CC  _P4_4                              part4a
+     000000CC  _TL2                               part4a
+     000000CC  _TMR2L                             part4a
+     000000CC  _TMR3L                             part4a
+     000000CC  _TMR4L                             part4a
+     000000CD  G$P4_5$0$0                         part4a
+     000000CD  G$TH2$0$0                          part4a
+     000000CD  G$TMR2H$0$0                        part4a
+     000000CD  G$TMR3H$0$0                        part4a
+     000000CD  G$TMR4H$0$0                        part4a
+     000000CD  _P4_5                              part4a
+     000000CD  _TH2                               part4a
+     000000CD  _TMR2H                             part4a
+     000000CD  _TMR3H                             part4a
+     000000CD  _TMR4H                             part4a
+     000000CE  G$EXF2$0$0                         part4a
+     000000CE  G$EXF3$0$0                         part4a
+     000000CE  G$EXF4$0$0                         part4a
+     000000CE  G$MAC0RNDL$0$0                     part4a
+     000000CE  G$P4_6$0$0                         part4a
+     000000CE  _EXF2                              part4a
+     000000CE  _EXF3                              part4a
+     000000CE  _EXF4                              part4a
+     000000CE  _MAC0RNDL                          part4a
+     000000CE  _P4_6                              part4a
+     000000CF  G$MAC0RNDH$0$0                     part4a
+     000000CF  G$P4_7$0$0                         part4a
+     000000CF  G$SMB0CR$0$0                       part4a
+     000000CF  G$TF2$0$0                          part4a
+     000000CF  G$TF3$0$0                          part4a
+     000000CF  G$TF4$0$0                          part4a
+     000000CF  _MAC0RNDH                          part4a
+     000000CF  _P4_7                              part4a
+     000000CF  _SMB0CR                            part4a
+     000000CF  _TF2                               part4a
+     000000CF  _TF3                               part4a
+     000000CF  _TF4                               part4a
+     000000D0  G$P$0$0                            part4a
+     000000D0  G$PSW$0$0                          part4a
+     000000D0  _P                                 part4a
+     000000D0  _PSW                               part4a
+     000000D1  G$F1$0$0                           part4a
+     000000D1  G$REF0CN$0$0                       part4a
+     000000D1  _F1                                part4a
+     000000D1  _REF0CN                            part4a
+     000000D2  G$DAC0L$0$0                        part4a
+     000000D2  G$DAC1L$0$0                        part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 Hexadecimal  [32-Bits]
 
@@ -692,57 +692,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000D2  G$OV$0$0                           part3
-     000000D2  _DAC0L                             part3
-     000000D2  _DAC1L                             part3
-     000000D2  _OV                                part3
-     000000D3  G$DAC0H$0$0                        part3
-     000000D3  G$DAC1H$0$0                        part3
-     000000D3  G$RS0$0$0                          part3
-     000000D3  _DAC0H                             part3
-     000000D3  _DAC1H                             part3
-     000000D3  _RS0                               part3
-     000000D4  G$DAC0CN$0$0                       part3
-     000000D4  G$DAC1CN$0$0                       part3
-     000000D4  G$RS1$0$0                          part3
-     000000D4  _DAC0CN                            part3
-     000000D4  _DAC1CN                            part3
-     000000D4  _RS1                               part3
-     000000D5  G$F0$0$0                           part3
-     000000D5  _F0                                part3
-     000000D6  G$AC$0$0                           part3
-     000000D6  _AC                                part3
-     000000D7  G$CY$0$0                           part3
-     000000D7  _CY                                part3
-     000000D8  G$CCF0$0$0                         part3
-     000000D8  G$P5$0$0                           part3
-     000000D8  G$P5_0$0$0                         part3
-     000000D8  G$PCA0CN$0$0                       part3
-     000000D8  _CCF0                              part3
-     000000D8  _P5                                part3
-     000000D8  _P5_0                              part3
-     000000D8  _PCA0CN                            part3
-     000000D9  G$CCF1$0$0                         part3
-     000000D9  G$P5_1$0$0                         part3
-     000000D9  G$PCA0MD$0$0                       part3
-     000000D9  _CCF1                              part3
-     000000D9  _P5_1                              part3
-     000000D9  _PCA0MD                            part3
-     000000DA  G$CCF2$0$0                         part3
-     000000DA  G$P5_2$0$0                         part3
-     000000DA  G$PCA0CPM0$0$0                     part3
-     000000DA  _CCF2                              part3
-     000000DA  _P5_2                              part3
-     000000DA  _PCA0CPM0                          part3
-     000000DB  G$CCF3$0$0                         part3
-     000000DB  G$P5_3$0$0                         part3
-     000000DB  G$PCA0CPM1$0$0                     part3
-     000000DB  _CCF3                              part3
-     000000DB  _P5_3                              part3
-     000000DB  _PCA0CPM1                          part3
-     000000DC  G$CCF4$0$0                         part3
-     000000DC  G$P5_4$0$0                         part3
-     000000DC  G$PCA0CPM2$0$0                     part3
+     000000D2  G$OV$0$0                           part4a
+     000000D2  _DAC0L                             part4a
+     000000D2  _DAC1L                             part4a
+     000000D2  _OV                                part4a
+     000000D3  G$DAC0H$0$0                        part4a
+     000000D3  G$DAC1H$0$0                        part4a
+     000000D3  G$RS0$0$0                          part4a
+     000000D3  _DAC0H                             part4a
+     000000D3  _DAC1H                             part4a
+     000000D3  _RS0                               part4a
+     000000D4  G$DAC0CN$0$0                       part4a
+     000000D4  G$DAC1CN$0$0                       part4a
+     000000D4  G$RS1$0$0                          part4a
+     000000D4  _DAC0CN                            part4a
+     000000D4  _DAC1CN                            part4a
+     000000D4  _RS1                               part4a
+     000000D5  G$F0$0$0                           part4a
+     000000D5  _F0                                part4a
+     000000D6  G$AC$0$0                           part4a
+     000000D6  _AC                                part4a
+     000000D7  G$CY$0$0                           part4a
+     000000D7  _CY                                part4a
+     000000D8  G$CCF0$0$0                         part4a
+     000000D8  G$P5$0$0                           part4a
+     000000D8  G$P5_0$0$0                         part4a
+     000000D8  G$PCA0CN$0$0                       part4a
+     000000D8  _CCF0                              part4a
+     000000D8  _P5                                part4a
+     000000D8  _P5_0                              part4a
+     000000D8  _PCA0CN                            part4a
+     000000D9  G$CCF1$0$0                         part4a
+     000000D9  G$P5_1$0$0                         part4a
+     000000D9  G$PCA0MD$0$0                       part4a
+     000000D9  _CCF1                              part4a
+     000000D9  _P5_1                              part4a
+     000000D9  _PCA0MD                            part4a
+     000000DA  G$CCF2$0$0                         part4a
+     000000DA  G$P5_2$0$0                         part4a
+     000000DA  G$PCA0CPM0$0$0                     part4a
+     000000DA  _CCF2                              part4a
+     000000DA  _P5_2                              part4a
+     000000DA  _PCA0CPM0                          part4a
+     000000DB  G$CCF3$0$0                         part4a
+     000000DB  G$P5_3$0$0                         part4a
+     000000DB  G$PCA0CPM1$0$0                     part4a
+     000000DB  _CCF3                              part4a
+     000000DB  _P5_3                              part4a
+     000000DB  _PCA0CPM1                          part4a
+     000000DC  G$CCF4$0$0                         part4a
+     000000DC  G$P5_4$0$0                         part4a
+     000000DC  G$PCA0CPM2$0$0                     part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
 Hexadecimal  [32-Bits]
 
@@ -752,57 +752,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000DC  _CCF4                              part3
-     000000DC  _P5_4                              part3
-     000000DC  _PCA0CPM2                          part3
-     000000DD  G$CCF5$0$0                         part3
-     000000DD  G$P5_5$0$0                         part3
-     000000DD  G$PCA0CPM3$0$0                     part3
-     000000DD  _CCF5                              part3
-     000000DD  _P5_5                              part3
-     000000DD  _PCA0CPM3                          part3
-     000000DE  G$CR$0$0                           part3
-     000000DE  G$P5_6$0$0                         part3
-     000000DE  G$PCA0CPM4$0$0                     part3
-     000000DE  _CR                                part3
-     000000DE  _P5_6                              part3
-     000000DE  _PCA0CPM4                          part3
-     000000DF  G$CF$0$0                           part3
-     000000DF  G$P5_7$0$0                         part3
-     000000DF  G$PCA0CPM5$0$0                     part3
-     000000DF  _CF                                part3
-     000000DF  _P5_7                              part3
-     000000DF  _PCA0CPM5                          part3
-     000000E0  G$ACC$0$0                          part3
-     000000E0  _ACC                               part3
-     000000E1  G$PCA0CPL5$0$0                     part3
-     000000E1  G$XBR0$0$0                         part3
-     000000E1  _PCA0CPL5                          part3
-     000000E1  _XBR0                              part3
-     000000E2  G$PCA0CPH5$0$0                     part3
-     000000E2  G$XBR1$0$0                         part3
-     000000E2  _PCA0CPH5                          part3
-     000000E2  _XBR1                              part3
-     000000E3  G$XBR2$0$0                         part3
-     000000E3  _XBR2                              part3
-     000000E6  G$EIE1$0$0                         part3
-     000000E6  _EIE1                              part3
-     000000E7  G$EIE2$0$0                         part3
-     000000E7  _EIE2                              part3
-     000000E8  G$AD0LJST$0$0                      part3
-     000000E8  G$AD2WINT$0$0                      part3
-     000000E8  G$ADC0CN$0$0                       part3
-     000000E8  G$ADC2CN$0$0                       part3
-     000000E8  G$P6$0$0                           part3
-     000000E8  G$P6_0$0$0                         part3
-     000000E8  _AD0LJST                           part3
-     000000E8  _AD2WINT                           part3
-     000000E8  _ADC0CN                            part3
-     000000E8  _ADC2CN                            part3
-     000000E8  _P6                                part3
-     000000E8  _P6_0                              part3
-     000000E9  G$AD0WINT$0$0                      part3
-     000000E9  G$AD2CM0$0$0                       part3
+     000000DC  _CCF4                              part4a
+     000000DC  _P5_4                              part4a
+     000000DC  _PCA0CPM2                          part4a
+     000000DD  G$CCF5$0$0                         part4a
+     000000DD  G$P5_5$0$0                         part4a
+     000000DD  G$PCA0CPM3$0$0                     part4a
+     000000DD  _CCF5                              part4a
+     000000DD  _P5_5                              part4a
+     000000DD  _PCA0CPM3                          part4a
+     000000DE  G$CR$0$0                           part4a
+     000000DE  G$P5_6$0$0                         part4a
+     000000DE  G$PCA0CPM4$0$0                     part4a
+     000000DE  _CR                                part4a
+     000000DE  _P5_6                              part4a
+     000000DE  _PCA0CPM4                          part4a
+     000000DF  G$CF$0$0                           part4a
+     000000DF  G$P5_7$0$0                         part4a
+     000000DF  G$PCA0CPM5$0$0                     part4a
+     000000DF  _CF                                part4a
+     000000DF  _P5_7                              part4a
+     000000DF  _PCA0CPM5                          part4a
+     000000E0  G$ACC$0$0                          part4a
+     000000E0  _ACC                               part4a
+     000000E1  G$PCA0CPL5$0$0                     part4a
+     000000E1  G$XBR0$0$0                         part4a
+     000000E1  _PCA0CPL5                          part4a
+     000000E1  _XBR0                              part4a
+     000000E2  G$PCA0CPH5$0$0                     part4a
+     000000E2  G$XBR1$0$0                         part4a
+     000000E2  _PCA0CPH5                          part4a
+     000000E2  _XBR1                              part4a
+     000000E3  G$XBR2$0$0                         part4a
+     000000E3  _XBR2                              part4a
+     000000E6  G$EIE1$0$0                         part4a
+     000000E6  _EIE1                              part4a
+     000000E7  G$EIE2$0$0                         part4a
+     000000E7  _EIE2                              part4a
+     000000E8  G$AD0LJST$0$0                      part4a
+     000000E8  G$AD2WINT$0$0                      part4a
+     000000E8  G$ADC0CN$0$0                       part4a
+     000000E8  G$ADC2CN$0$0                       part4a
+     000000E8  G$P6$0$0                           part4a
+     000000E8  G$P6_0$0$0                         part4a
+     000000E8  _AD0LJST                           part4a
+     000000E8  _AD2WINT                           part4a
+     000000E8  _ADC0CN                            part4a
+     000000E8  _ADC2CN                            part4a
+     000000E8  _P6                                part4a
+     000000E8  _P6_0                              part4a
+     000000E9  G$AD0WINT$0$0                      part4a
+     000000E9  G$AD2CM0$0$0                       part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
 Hexadecimal  [32-Bits]
 
@@ -812,57 +812,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000E9  G$P6_1$0$0                         part3
-     000000E9  G$PCA0CPL2$0$0                     part3
-     000000E9  _AD0WINT                           part3
-     000000E9  _AD2CM0                            part3
-     000000E9  _P6_1                              part3
-     000000E9  _PCA0CPL2                          part3
-     000000EA  G$AD0CM0$0$0                       part3
-     000000EA  G$AD2CM1$0$0                       part3
-     000000EA  G$P6_2$0$0                         part3
-     000000EA  G$PCA0CPH2$0$0                     part3
-     000000EA  _AD0CM0                            part3
-     000000EA  _AD2CM1                            part3
-     000000EA  _P6_2                              part3
-     000000EA  _PCA0CPH2                          part3
-     000000EB  G$AD0CM1$0$0                       part3
-     000000EB  G$AD2CM2$0$0                       part3
-     000000EB  G$P6_3$0$0                         part3
-     000000EB  G$PCA0CPL3$0$0                     part3
-     000000EB  _AD0CM1                            part3
-     000000EB  _AD2CM2                            part3
-     000000EB  _P6_3                              part3
-     000000EB  _PCA0CPL3                          part3
-     000000EC  G$AD0BUSY$0$0                      part3
-     000000EC  G$AD2BUSY$0$0                      part3
-     000000EC  G$P6_4$0$0                         part3
-     000000EC  G$PCA0CPH3$0$0                     part3
-     000000EC  _AD0BUSY                           part3
-     000000EC  _AD2BUSY                           part3
-     000000EC  _P6_4                              part3
-     000000EC  _PCA0CPH3                          part3
-     000000ED  G$AD0INT$0$0                       part3
-     000000ED  G$AD2INT$0$0                       part3
-     000000ED  G$P6_5$0$0                         part3
-     000000ED  G$PCA0CPL4$0$0                     part3
-     000000ED  _AD0INT                            part3
-     000000ED  _AD2INT                            part3
-     000000ED  _P6_5                              part3
-     000000ED  _PCA0CPL4                          part3
-     000000EE  G$AD0TM$0$0                        part3
-     000000EE  G$AD2TM$0$0                        part3
-     000000EE  G$P6_6$0$0                         part3
-     000000EE  G$PCA0CPH4$0$0                     part3
-     000000EE  _AD0TM                             part3
-     000000EE  _AD2TM                             part3
-     000000EE  _P6_6                              part3
-     000000EE  _PCA0CPH4                          part3
-     000000EF  G$AD0EN$0$0                        part3
-     000000EF  G$AD2EN$0$0                        part3
-     000000EF  G$P6_7$0$0                         part3
-     000000EF  G$RSTSRC$0$0                       part3
-     000000EF  _AD0EN                             part3
+     000000E9  G$P6_1$0$0                         part4a
+     000000E9  G$PCA0CPL2$0$0                     part4a
+     000000E9  _AD0WINT                           part4a
+     000000E9  _AD2CM0                            part4a
+     000000E9  _P6_1                              part4a
+     000000E9  _PCA0CPL2                          part4a
+     000000EA  G$AD0CM0$0$0                       part4a
+     000000EA  G$AD2CM1$0$0                       part4a
+     000000EA  G$P6_2$0$0                         part4a
+     000000EA  G$PCA0CPH2$0$0                     part4a
+     000000EA  _AD0CM0                            part4a
+     000000EA  _AD2CM1                            part4a
+     000000EA  _P6_2                              part4a
+     000000EA  _PCA0CPH2                          part4a
+     000000EB  G$AD0CM1$0$0                       part4a
+     000000EB  G$AD2CM2$0$0                       part4a
+     000000EB  G$P6_3$0$0                         part4a
+     000000EB  G$PCA0CPL3$0$0                     part4a
+     000000EB  _AD0CM1                            part4a
+     000000EB  _AD2CM2                            part4a
+     000000EB  _P6_3                              part4a
+     000000EB  _PCA0CPL3                          part4a
+     000000EC  G$AD0BUSY$0$0                      part4a
+     000000EC  G$AD2BUSY$0$0                      part4a
+     000000EC  G$P6_4$0$0                         part4a
+     000000EC  G$PCA0CPH3$0$0                     part4a
+     000000EC  _AD0BUSY                           part4a
+     000000EC  _AD2BUSY                           part4a
+     000000EC  _P6_4                              part4a
+     000000EC  _PCA0CPH3                          part4a
+     000000ED  G$AD0INT$0$0                       part4a
+     000000ED  G$AD2INT$0$0                       part4a
+     000000ED  G$P6_5$0$0                         part4a
+     000000ED  G$PCA0CPL4$0$0                     part4a
+     000000ED  _AD0INT                            part4a
+     000000ED  _AD2INT                            part4a
+     000000ED  _P6_5                              part4a
+     000000ED  _PCA0CPL4                          part4a
+     000000EE  G$AD0TM$0$0                        part4a
+     000000EE  G$AD2TM$0$0                        part4a
+     000000EE  G$P6_6$0$0                         part4a
+     000000EE  G$PCA0CPH4$0$0                     part4a
+     000000EE  _AD0TM                             part4a
+     000000EE  _AD2TM                             part4a
+     000000EE  _P6_6                              part4a
+     000000EE  _PCA0CPH4                          part4a
+     000000EF  G$AD0EN$0$0                        part4a
+     000000EF  G$AD2EN$0$0                        part4a
+     000000EF  G$P6_7$0$0                         part4a
+     000000EF  G$RSTSRC$0$0                       part4a
+     000000EF  _AD0EN                             part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
 Hexadecimal  [32-Bits]
 
@@ -872,57 +872,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000EF  _AD2EN                             part3
-     000000EF  _P6_7                              part3
-     000000EF  _RSTSRC                            part3
-     000000F0  G$B$0$0                            part3
-     000000F0  _B                                 part3
-     000000F5  _B_5                               _gptrput
-     000000F6  G$EIP1$0$0                         part3
-     000000F6  _B_6                               _gptrput
-     000000F6  _EIP1                              part3
-     000000F7  G$EIP2$0$0                         part3
-     000000F7  _B_7                               _gptrput
-     000000F7  _EIP2                              part3
-     000000F8  G$P7$0$0                           part3
-     000000F8  G$P7_0$0$0                         part3
-     000000F8  G$SPI0CN$0$0                       part3
-     000000F8  G$SPIEN$0$0                        part3
-     000000F8  _P7                                part3
-     000000F8  _P7_0                              part3
-     000000F8  _SPI0CN                            part3
-     000000F8  _SPIEN                             part3
-     000000F9  G$P7_1$0$0                         part3
-     000000F9  G$PCA0L$0$0                        part3
-     000000F9  G$TXBMT$0$0                        part3
-     000000F9  _P7_1                              part3
-     000000F9  _PCA0L                             part3
-     000000F9  _TXBMT                             part3
-     000000FA  G$NSSMD0$0$0                       part3
-     000000FA  G$P7_2$0$0                         part3
-     000000FA  G$PCA0H$0$0                        part3
-     000000FA  _NSSMD0                            part3
-     000000FA  _P7_2                              part3
-     000000FA  _PCA0H                             part3
-     000000FB  G$NSSMD1$0$0                       part3
-     000000FB  G$P7_3$0$0                         part3
-     000000FB  G$PCA0CPL0$0$0                     part3
-     000000FB  _NSSMD1                            part3
-     000000FB  _P7_3                              part3
-     000000FB  _PCA0CPL0                          part3
-     000000FC  G$P7_4$0$0                         part3
-     000000FC  G$PCA0CPH0$0$0                     part3
-     000000FC  G$RXOVRN$0$0                       part3
-     000000FC  _P7_4                              part3
-     000000FC  _PCA0CPH0                          part3
-     000000FC  _RXOVRN                            part3
-     000000FD  G$MODF$0$0                         part3
-     000000FD  G$P7_5$0$0                         part3
-     000000FD  G$PCA0CPL1$0$0                     part3
-     000000FD  _MODF                              part3
-     000000FD  _P7_5                              part3
-     000000FD  _PCA0CPL1                          part3
-     000000FE  G$P7_6$0$0                         part3
+     000000EF  _AD2EN                             part4a
+     000000EF  _P6_7                              part4a
+     000000EF  _RSTSRC                            part4a
+     000000F0  G$B$0$0                            part4a
+     000000F0  _B                                 part4a
+     000000F6  G$EIP1$0$0                         part4a
+     000000F6  _EIP1                              part4a
+     000000F7  G$EIP2$0$0                         part4a
+     000000F7  _EIP2                              part4a
+     000000F8  G$P7$0$0                           part4a
+     000000F8  G$P7_0$0$0                         part4a
+     000000F8  G$SPI0CN$0$0                       part4a
+     000000F8  G$SPIEN$0$0                        part4a
+     000000F8  _P7                                part4a
+     000000F8  _P7_0                              part4a
+     000000F8  _SPI0CN                            part4a
+     000000F8  _SPIEN                             part4a
+     000000F9  G$P7_1$0$0                         part4a
+     000000F9  G$PCA0L$0$0                        part4a
+     000000F9  G$TXBMT$0$0                        part4a
+     000000F9  _P7_1                              part4a
+     000000F9  _PCA0L                             part4a
+     000000F9  _TXBMT                             part4a
+     000000FA  G$NSSMD0$0$0                       part4a
+     000000FA  G$P7_2$0$0                         part4a
+     000000FA  G$PCA0H$0$0                        part4a
+     000000FA  _NSSMD0                            part4a
+     000000FA  _P7_2                              part4a
+     000000FA  _PCA0H                             part4a
+     000000FB  G$NSSMD1$0$0                       part4a
+     000000FB  G$P7_3$0$0                         part4a
+     000000FB  G$PCA0CPL0$0$0                     part4a
+     000000FB  _NSSMD1                            part4a
+     000000FB  _P7_3                              part4a
+     000000FB  _PCA0CPL0                          part4a
+     000000FC  G$P7_4$0$0                         part4a
+     000000FC  G$PCA0CPH0$0$0                     part4a
+     000000FC  G$RXOVRN$0$0                       part4a
+     000000FC  _P7_4                              part4a
+     000000FC  _PCA0CPH0                          part4a
+     000000FC  _RXOVRN                            part4a
+     000000FD  G$MODF$0$0                         part4a
+     000000FD  G$P7_5$0$0                         part4a
+     000000FD  G$PCA0CPL1$0$0                     part4a
+     000000FD  _MODF                              part4a
+     000000FD  _P7_5                              part4a
+     000000FD  _PCA0CPL1                          part4a
+     000000FE  G$P7_6$0$0                         part4a
+     000000FE  G$PCA0CPH1$0$0                     part4a
+     000000FE  G$WCOL$0$0                         part4a
+     000000FE  _P7_6                              part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
@@ -932,57 +932,57 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000FE  G$PCA0CPH1$0$0                     part3
-     000000FE  G$WCOL$0$0                         part3
-     000000FE  _P7_6                              part3
-     000000FE  _PCA0CPH1                          part3
-     000000FE  _WCOL                              part3
-     000000FF  G$P7_7$0$0                         part3
-     000000FF  G$SPIF$0$0                         part3
-     000000FF  G$WDTCN$0$0                        part3
-     000000FF  _P7_7                              part3
-     000000FF  _SPIF                              part3
-     000000FF  _WDTCN                             part3
-     00008C8A  G$TMR0$0$0                         part3
-     00008C8A  _TMR0                              part3
-     00008D8B  G$TMR1$0$0                         part3
-     00008D8B  _TMR1                              part3
-     00009493  G$MAC0ACC$0$0                      part3
-     00009493  _MAC0ACC                           part3
-     0000BFBE  G$ADC0$0$0                         part3
-     0000BFBE  _ADC0                              part3
-     0000C2C1  G$MAC0A$0$0                        part3
-     0000C2C1  _MAC0A                             part3
-     0000C5C4  G$ADC0GT$0$0                       part3
-     0000C5C4  _ADC0GT                            part3
-     0000C7C6  G$ADC0LT$0$0                       part3
-     0000C7C6  _ADC0LT                            part3
-     0000CBCA  G$RCAP2$0$0                        part3
-     0000CBCA  G$RCAP3$0$0                        part3
-     0000CBCA  G$RCAP4$0$0                        part3
-     0000CBCA  _RCAP2                             part3
-     0000CBCA  _RCAP3                             part3
-     0000CBCA  _RCAP4                             part3
-     0000CDCC  G$TMR2$0$0                         part3
-     0000CDCC  G$TMR3$0$0                         part3
-     0000CDCC  G$TMR4$0$0                         part3
-     0000CDCC  _TMR2                              part3
-     0000CDCC  _TMR3                              part3
-     0000CDCC  _TMR4                              part3
-     0000CFCE  G$MAC0RND$0$0                      part3
-     0000CFCE  _MAC0RND                           part3
-     0000D3D2  G$DAC0$0$0                         part3
-     0000D3D2  G$DAC1$0$0                         part3
-     0000D3D2  _DAC0                              part3
-     0000D3D2  _DAC1                              part3
-     0000E2E1  G$PCA0CP5$0$0                      part3
-     0000E2E1  _PCA0CP5                           part3
-     0000EAE9  G$PCA0CP2$0$0                      part3
-     0000EAE9  _PCA0CP2                           part3
-     0000ECEB  G$PCA0CP3$0$0                      part3
-     0000ECEB  _PCA0CP3                           part3
-     0000EEED  G$PCA0CP4$0$0                      part3
-     0000EEED  _PCA0CP4                           part3
+     000000FE  _PCA0CPH1                          part4a
+     000000FE  _WCOL                              part4a
+     000000FF  G$P7_7$0$0                         part4a
+     000000FF  G$SPIF$0$0                         part4a
+     000000FF  G$WDTCN$0$0                        part4a
+     000000FF  _P7_7                              part4a
+     000000FF  _SPIF                              part4a
+     000000FF  _WDTCN                             part4a
+     00008C8A  G$TMR0$0$0                         part4a
+     00008C8A  _TMR0                              part4a
+     00008D8B  G$TMR1$0$0                         part4a
+     00008D8B  _TMR1                              part4a
+     00009493  G$MAC0ACC$0$0                      part4a
+     00009493  _MAC0ACC                           part4a
+     0000BFBE  G$ADC0$0$0                         part4a
+     0000BFBE  _ADC0                              part4a
+     0000C2C1  G$MAC0A$0$0                        part4a
+     0000C2C1  _MAC0A                             part4a
+     0000C5C4  G$ADC0GT$0$0                       part4a
+     0000C5C4  _ADC0GT                            part4a
+     0000C7C6  G$ADC0LT$0$0                       part4a
+     0000C7C6  _ADC0LT                            part4a
+     0000CBCA  G$RCAP2$0$0                        part4a
+     0000CBCA  G$RCAP3$0$0                        part4a
+     0000CBCA  G$RCAP4$0$0                        part4a
+     0000CBCA  _RCAP2                             part4a
+     0000CBCA  _RCAP3                             part4a
+     0000CBCA  _RCAP4                             part4a
+     0000CDCC  G$TMR2$0$0                         part4a
+     0000CDCC  G$TMR3$0$0                         part4a
+     0000CDCC  G$TMR4$0$0                         part4a
+     0000CDCC  _TMR2                              part4a
+     0000CDCC  _TMR3                              part4a
+     0000CDCC  _TMR4                              part4a
+     0000CFCE  G$MAC0RND$0$0                      part4a
+     0000CFCE  _MAC0RND                           part4a
+     0000D3D2  G$DAC0$0$0                         part4a
+     0000D3D2  G$DAC1$0$0                         part4a
+     0000D3D2  _DAC0                              part4a
+     0000D3D2  _DAC1                              part4a
+     0000E2E1  G$PCA0CP5$0$0                      part4a
+     0000E2E1  _PCA0CP5                           part4a
+     0000EAE9  G$PCA0CP2$0$0                      part4a
+     0000EAE9  _PCA0CP2                           part4a
+     0000ECEB  G$PCA0CP3$0$0                      part4a
+     0000ECEB  _PCA0CP3                           part4a
+     0000EEED  G$PCA0CP4$0$0                      part4a
+     0000EEED  _PCA0CP4                           part4a
+     0000FAF9  G$PCA0$0$0                         part4a
+     0000FAF9  _PCA0                              part4a
+     0000FCFB  G$PCA0CP0$0$0                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
 Hexadecimal  [32-Bits]
 
@@ -992,12 +992,9 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000FAF9  G$PCA0$0$0                         part3
-     0000FAF9  _PCA0                              part3
-     0000FCFB  G$PCA0CP0$0$0                      part3
-     0000FCFB  _PCA0CP0                           part3
-     0000FEFD  G$PCA0CP1$0$0                      part3
-     0000FEFD  _PCA0CP1                           part3
+     0000FCFB  _PCA0CP0                           part4a
+     0000FEFD  G$PCA0CP1$0$0                      part4a
+     0000FEFD  _PCA0CP1                           part4a
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
 Hexadecimal  [32-Bits]
@@ -1017,449 +1014,521 @@ DSEG                                00000000    00000080 =         128. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000008  G$start_conversion$0$0             part3
-     00000008  _start_conversion                  part3
-     00000009  G$dig_val$0$0                      part3
-     00000009  _dig_val                           part3
-     0000000B  Lpart3.main$analogval$1$28         part3
-     0000000D  Lpart3.main$accum$1$28             part3
+     00000008  G$start_conversion$0$0             part4a
+     00000008  _start_conversion                  part4a
+     00000009  G$dig_val$0$0                      part4a
+     00000009  _dig_val                           part4a
+     0000000B  Lpart4a.main$adcValH$1$29          part4a
+     00000010  Lpart4a.main$adcValL$1$29          part4a
+     00000015  Lpart4a.main$results$1$29          part4a
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-OSEG                                0000002D    00000001 =           1. bytes (REL,OVR)
+SSEG                                00000019    000000E7 =         231. bytes (REL,OVR)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000002D  __gptrput_PARM_2                   _gptrput
+     00000019  __start__stack                     part4a
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 22.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-SSEG                                0000002E    000000D2 =         210. bytes (REL,OVR)
+HOME                                00000000    00000006 =           6. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000002E  __start__stack                     part3
-
+C:   00000000  A$part4a$1265                      part4a
+C:   00000003  A$part4a$1295                      part4a
+C:   00000003  __sdcc_program_startup             part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 23.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-HOME                                00000000    00000009 =           9. bytes (REL,CON,CODE)
+GSINIT0                             00000006    00000003 =           3. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000000  A$part3$1264                       part3
-C:   00000003  A$part3$1265                       part3
-C:   00000006  A$part3$1295                       part3
-C:   00000006  __sdcc_program_startup             part3
+C:   00000006  __sdcc_gsinit_startup              
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 24.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT0                             00000009    00000003 =           3. bytes (REL,CON,CODE)
+GSINIT2                             00000009    0000000A =          10. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000009  __sdcc_gsinit_startup              
-
 ASxxxx Linker V03.00 + NoICE + sdld,  page 25.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT2                             0000000C    0000000A =          10. bytes (REL,CON,CODE)
+GSINIT3                             00000013    00000022 =          34. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+C:   00000013  __mcs51_genXINIT                   
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 26.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT3                             00000016    00000022 =          34. bytes (REL,CON,CODE)
+GSINIT4                             00000035    0000002A =          42. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000016  __mcs51_genXINIT                   
+C:   00000035  __mcs51_genRAMCLEAR                
+C:   0000003B  __mcs51_genXRAMCLEAR               
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 27.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT4                             00000038    0000002A =          42. bytes (REL,CON,CODE)
+GSINIT                              0000005F    00000008 =           8. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000038  __mcs51_genRAMCLEAR                
-C:   0000003E  __mcs51_genXRAMCLEAR               
-
+C:   0000005F  A$part4a$1281                      part4a
+C:   0000005F  C$part4a.c$34$1$46                 part4a
+C:   00000062  A$part4a$1284                      part4a
+C:   00000062  C$part4a.c$35$1$46                 part4a
+C:   00000063  A$part4a$1285                      part4a
+C:   00000065  A$part4a$1286                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 28.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT                              00000062    00000008 =           8. bytes (REL,CON,CODE)
+GSFINAL                             00000067    00000003 =           3. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000062  A$part3$1281                       part3
-C:   00000062  C$part3.c$34$1$45                  part3
-C:   00000065  A$part3$1284                       part3
-C:   00000065  C$part3.c$35$1$45                  part3
-C:   00000066  A$part3$1285                       part3
-C:   00000068  A$part3$1286                       part3
+C:   00000067  A$part4a$1288                      part4a
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 29.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSFINAL                             0000006A    00000003 =           3. bytes (REL,CON,CODE)
+CSEG                                0000006A    0000019C =         412. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000006A  A$part3$1288                       part3
-
+C:   0000006A  A$part4a$1321                      part4a
+C:   0000006A  C$putget.h$18$0$0                  part4a
+C:   0000006A  G$putchar$0$0                      part4a
+C:   0000006A  _putchar                           part4a
+C:   0000006C  A$part4a$1327                      part4a
+C:   0000006C  C$putget.h$20$1$16                 part4a
+C:   0000006C  C$putget.h$21$1$16                 part4a
+C:   0000006F  A$part4a$1328                      part4a
+C:   00000071  A$part4a$1332                      part4a
+C:   00000071  C$putget.h$22$1$16                 part4a
+C:   00000073  A$part4a$1335                      part4a
+C:   00000073  C$putget.h$23$1$16                 part4a
+C:   00000073  XG$putchar$0$0                     part4a
+C:   00000074  A$part4a$1353                      part4a
+C:   00000074  C$putget.h$28$1$16                 part4a
+C:   00000074  C$putget.h$31$1$18                 part4a
+C:   00000074  C$putget.h$32$1$18                 part4a
+C:   00000074  G$getchar$0$0                      part4a
+C:   00000074  _getchar                           part4a
+C:   00000077  A$part4a$1354                      part4a
+C:   00000079  A$part4a$1358                      part4a
+C:   00000079  C$putget.h$33$1$18                 part4a
+C:   0000007C  A$part4a$1363                      part4a
+C:   0000007C  C$putget.h$35$1$18                 part4a
+C:   0000007C  C$putget.h$36$1$18                 part4a
+C:   0000007C  XG$getchar$0$0                     part4a
+C:   0000007D  A$part4a$1385                      part4a
+C:   0000007D  C$part4a.c$40$1$18                 part4a
+C:   0000007D  C$part4a.c$50$1$29                 part4a
+C:   0000007D  G$main$0$0                         part4a
+C:   0000007D  _main                              part4a
+C:   00000080  A$part4a$1388                      part4a
+C:   00000080  C$part4a.c$51$1$29                 part4a
+C:   00000083  A$part4a$1391                      part4a
+C:   00000083  C$part4a.c$53$1$29                 part4a
+C:   00000086  A$part4a$1394                      part4a
+C:   00000086  C$part4a.c$54$1$29                 part4a
+C:   00000089  A$part4a$1397                      part4a
+C:   00000089  C$part4a.c$55$1$29                 part4a
+C:   0000008C  A$part4a$1400                      part4a
+C:   0000008C  C$part4a.c$56$1$29                 part4a
+C:   0000008F  A$part4a$1403                      part4a
+C:   0000008F  C$part4a.c$57$1$29                 part4a
+C:   00000092  A$part4a$1406                      part4a
+C:   00000092  C$part4a.c$59$1$29                 part4a
+C:   00000095  A$part4a$1407                      part4a
+C:   00000098  A$part4a$1408                      part4a
+C:   0000009B  A$part4a$1409                      part4a
+C:   0000009E  A$part4a$1410                      part4a
+C:   000000A1  A$part4a$1411                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 30.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000006D    00000156 =         342. bytes (REL,CON,CODE)
+CSEG                                0000006A    0000019C =         412. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000006D  A$part3$1321                       part3
-C:   0000006D  C$putget.h$18$0$0                  part3
-C:   0000006D  G$putchar$0$0                      part3
-C:   0000006D  _putchar                           part3
-C:   0000006F  A$part3$1327                       part3
-C:   0000006F  C$putget.h$20$1$16                 part3
-C:   0000006F  C$putget.h$21$1$16                 part3
-C:   00000072  A$part3$1328                       part3
-C:   00000074  A$part3$1332                       part3
-C:   00000074  C$putget.h$22$1$16                 part3
-C:   00000076  A$part3$1335                       part3
-C:   00000076  C$putget.h$23$1$16                 part3
-C:   00000076  XG$putchar$0$0                     part3
-C:   00000077  A$part3$1353                       part3
-C:   00000077  C$putget.h$28$1$16                 part3
-C:   00000077  C$putget.h$31$1$18                 part3
-C:   00000077  C$putget.h$32$1$18                 part3
-C:   00000077  G$getchar$0$0                      part3
-C:   00000077  _getchar                           part3
-C:   0000007A  A$part3$1354                       part3
-C:   0000007C  A$part3$1358                       part3
-C:   0000007C  C$putget.h$33$1$18                 part3
-C:   0000007F  A$part3$1363                       part3
-C:   0000007F  C$putget.h$35$1$18                 part3
-C:   0000007F  C$putget.h$36$1$18                 part3
-C:   0000007F  XG$getchar$0$0                     part3
-C:   00000080  A$part3$1391                       part3
-C:   00000080  C$part3.c$40$1$18                  part3
-C:   00000080  C$part3.c$49$1$18                  part3
-C:   00000080  G$main$0$0                         part3
-C:   00000080  _main                              part3
-C:   00000081  A$part3$1392                       part3
-C:   00000083  A$part3$1393                       part3
-C:   00000085  A$part3$1394                       part3
-C:   00000087  A$part3$1395                       part3
-C:   00000089  A$part3$1396                       part3
-C:   0000008B  A$part3$1397                       part3
-C:   0000008D  A$part3$1398                       part3
-C:   0000008F  A$part3$1399                       part3
-C:   00000091  A$part3$1400                       part3
-C:   00000092  A$part3$1401                       part3
-C:   00000094  A$part3$1402                       part3
-C:   00000096  A$part3$1403                       part3
-C:   00000098  A$part3$1404                       part3
-C:   0000009A  A$part3$1405                       part3
-C:   0000009C  A$part3$1406                       part3
-C:   0000009E  A$part3$1407                       part3
-C:   000000A0  A$part3$1408                       part3
-C:   000000A2  A$part3$1409                       part3
-C:   000000A3  A$part3$1410                       part3
+C:   000000A4  A$part4a$1412                      part4a
+C:   000000A7  A$part4a$1413                      part4a
+C:   000000AA  A$part4a$1416                      part4a
+C:   000000AA  C$part4a.c$60$1$29                 part4a
+C:   000000AC  A$part4a$1419                      part4a
+C:   000000AC  C$part4a.c$61$1$29                 part4a
+C:   000000AD  A$part4a$1420                      part4a
+C:   000000AE  A$part4a$1421                      part4a
+C:   000000B0  A$part4a$1422                      part4a
+C:   000000B2  A$part4a$1423                      part4a
+C:   000000B4  A$part4a$1424                      part4a
+C:   000000B6  A$part4a$1430                      part4a
+C:   000000B6  C$part4a.c$62$1$29                 part4a
+C:   000000B6  C$part4a.c$64$2$30                 part4a
+C:   000000B9  A$part4a$1433                      part4a
+C:   000000B9  C$part4a.c$65$2$30                 part4a
+C:   000000BB  A$part4a$1436                      part4a
+C:   000000BB  C$part4a.c$66$2$30                 part4a
+C:   000000BD  A$part4a$1440                      part4a
+C:   000000BD  C$part4a.c$67$2$30                 part4a
+C:   000000C0  A$part4a$1443                      part4a
+C:   000000C0  C$part4a.c$68$2$30                 part4a
+C:   000000C2  A$part4a$1446                      part4a
+C:   000000C2  C$part4a.c$69$2$30                 part4a
+C:   000000C4  A$part4a$1449                      part4a
+C:   000000C4  C$part4a.c$73$2$30                 part4a
+C:   000000C6  A$part4a$1450                      part4a
+C:   000000C8  A$part4a$1453                      part4a
+C:   000000C8  C$part4a.c$74$2$30                 part4a
+C:   000000CA  A$part4a$1454                      part4a
+C:   000000CC  A$part4a$1457                      part4a
+C:   000000CC  C$part4a.c$75$2$30                 part4a
+C:   000000CE  A$part4a$1458                      part4a
+C:   000000D0  A$part4a$1461                      part4a
+C:   000000D0  C$part4a.c$76$2$30                 part4a
+C:   000000D2  A$part4a$1462                      part4a
+C:   000000D4  A$part4a$1465                      part4a
+C:   000000D4  C$part4a.c$77$2$30                 part4a
+C:   000000D6  A$part4a$1466                      part4a
+C:   000000D8  A$part4a$1469                      part4a
+C:   000000D8  C$part4a.c$78$2$30                 part4a
+C:   000000DA  A$part4a$1470                      part4a
+C:   000000DC  A$part4a$1473                      part4a
+C:   000000DC  C$part4a.c$79$2$30                 part4a
+C:   000000DE  A$part4a$1474                      part4a
+C:   000000E0  A$part4a$1477                      part4a
+C:   000000E0  C$part4a.c$80$2$30                 part4a
+C:   000000E2  A$part4a$1478                      part4a
+C:   000000E4  A$part4a$1481                      part4a
+C:   000000E4  C$part4a.c$81$2$30                 part4a
+C:   000000E6  A$part4a$1482                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 31.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000006D    00000156 =         342. bytes (REL,CON,CODE)
+CSEG                                0000006A    0000019C =         412. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000000A5  A$part3$1411                       part3
-C:   000000A7  A$part3$1412                       part3
-C:   000000A9  A$part3$1413                       part3
-C:   000000AB  A$part3$1414                       part3
-C:   000000AD  A$part3$1415                       part3
-C:   000000AF  A$part3$1416                       part3
-C:   000000B1  A$part3$1417                       part3
-C:   000000B3  A$part3$1418                       part3
-C:   000000B4  A$part3$1419                       part3
-C:   000000B6  A$part3$1420                       part3
-C:   000000B8  A$part3$1421                       part3
-C:   000000BA  A$part3$1422                       part3
-C:   000000BC  A$part3$1423                       part3
-C:   000000BE  A$part3$1424                       part3
-C:   000000C0  A$part3$1425                       part3
-C:   000000C2  A$part3$1426                       part3
-C:   000000C4  A$part3$1433                       part3
-C:   000000C4  C$part3.c$55$1$28                  part3
-C:   000000C4  C$part3.c$56$1$28                  part3
-C:   000000C4  C$part3.c$58$1$28                  part3
-C:   000000C7  A$part3$1436                       part3
-C:   000000C7  C$part3.c$59$1$28                  part3
-C:   000000CA  A$part3$1439                       part3
-C:   000000CA  C$part3.c$61$1$28                  part3
-C:   000000CD  A$part3$1442                       part3
-C:   000000CD  C$part3.c$62$1$28                  part3
-C:   000000D0  A$part3$1445                       part3
-C:   000000D0  C$part3.c$63$1$28                  part3
-C:   000000D3  A$part3$1448                       part3
-C:   000000D3  C$part3.c$64$1$28                  part3
-C:   000000D6  A$part3$1451                       part3
-C:   000000D6  C$part3.c$65$1$28                  part3
-C:   000000D9  A$part3$1454                       part3
-C:   000000D9  C$part3.c$66$1$28                  part3
-C:   000000DC  A$part3$1460                       part3
-C:   000000DC  C$part3.c$70$1$28                  part3
-C:   000000DC  C$part3.c$73$2$29                  part3
-C:   000000DF  A$part3$1463                       part3
-C:   000000DF  C$part3.c$74$2$29                  part3
-C:   000000E1  A$part3$1466                       part3
-C:   000000E1  C$part3.c$75$2$29                  part3
-C:   000000E3  A$part3$1470                       part3
-C:   000000E3  C$part3.c$76$2$29                  part3
-C:   000000E6  A$part3$1473                       part3
-C:   000000E6  C$part3.c$77$2$29                  part3
-C:   000000E9  A$part3$1476                       part3
-C:   000000E9  C$part3.c$78$2$29                  part3
-C:   000000EC  A$part3$1477                       part3
-C:   000000EF  A$part3$1478                       part3
-C:   000000F1  A$part3$1479                       part3
-C:   000000F4  A$part3$1482                       part3
+C:   000000E8  A$part4a$1483                      part4a
+C:   000000EA  A$part4a$1484                      part4a
+C:   000000EC  A$part4a$1487                      part4a
+C:   000000EC  C$part4a.c$82$2$30                 part4a
+C:   000000EE  A$part4a$1488                      part4a
+C:   000000F0  A$part4a$1491                      part4a
+C:   000000F0  C$part4a.c$84$2$30                 part4a
+C:   000000F2  A$part4a$1494                      part4a
+C:   000000F2  C$part4a.c$85$2$30                 part4a
+C:   000000F4  A$part4a$1497                      part4a
+C:   000000F4  C$part4a.c$87$2$30                 part4a
+C:   000000F7  A$part4a$1500                      part4a
+C:   000000F7  C$part4a.c$88$2$30                 part4a
+C:   000000FA  A$part4a$1503                      part4a
+C:   000000FA  C$part4a.c$91$2$30                 part4a
+C:   000000FD  A$part4a$1506                      part4a
+C:   000000FD  C$part4a.c$92$2$30                 part4a
+C:   00000100  A$part4a$1509                      part4a
+C:   00000100  C$part4a.c$93$2$30                 part4a
+C:   00000102  A$part4a$1512                      part4a
+C:   00000102  C$part4a.c$94$2$30                 part4a
+C:   00000104  A$part4a$1515                      part4a
+C:   00000104  C$part4a.c$96$2$30                 part4a
+C:   00000107  A$part4a$1518                      part4a
+C:   00000107  C$part4a.c$97$2$30                 part4a
+C:   0000010A  A$part4a$1521                      part4a
+C:   0000010A  C$part4a.c$98$2$30                 part4a
+C:   0000010D  A$part4a$1524                      part4a
+C:   0000010D  C$part4a.c$99$2$30                 part4a
+C:   00000110  A$part4a$1527                      part4a
+C:   00000110  C$part4a.c$101$2$30                part4a
+C:   00000113  A$part4a$1530                      part4a
+C:   00000113  C$part4a.c$102$2$30                part4a
+C:   00000116  A$part4a$1533                      part4a
+C:   00000116  C$part4a.c$103$2$30                part4a
+C:   00000119  A$part4a$1536                      part4a
+C:   00000119  C$part4a.c$104$2$30                part4a
+C:   0000011C  A$part4a$1539                      part4a
+C:   0000011C  C$part4a.c$106$2$30                part4a
+C:   0000011F  A$part4a$1542                      part4a
+C:   0000011F  C$part4a.c$107$2$30                part4a
+C:   00000122  A$part4a$1545                      part4a
+C:   00000122  C$part4a.c$108$2$30                part4a
+C:   00000125  A$part4a$1548                      part4a
+C:   00000125  C$part4a.c$109$2$30                part4a
+C:   00000128  A$part4a$1551                      part4a
+C:   00000128  C$part4a.c$111$2$30                part4a
+C:   0000012B  A$part4a$1554                      part4a
+C:   0000012B  C$part4a.c$112$2$30                part4a
+C:   0000012E  A$part4a$1557                      part4a
+C:   0000012E  C$part4a.c$113$2$30                part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 32.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000006D    00000156 =         342. bytes (REL,CON,CODE)
+CSEG                                0000006A    0000019C =         412. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000000F4  C$part3.c$80$2$29                  part3
-C:   000000F7  A$part3$1485                       part3
-C:   000000F7  C$part3.c$81$2$29                  part3
-C:   000000F9  A$part3$1486                       part3
-C:   000000FB  A$part3$1489                       part3
-C:   000000FB  C$part3.c$82$2$29                  part3
-C:   000000FE  A$part3$1492                       part3
-C:   000000FE  C$part3.c$84$2$29                  part3
-C:   00000101  A$part3$1493                       part3
-C:   00000103  A$part3$1496                       part3
-C:   00000103  C$part3.c$94$1$28                  part3
-C:   00000103  XG$main$0$0                        part3
-C:   00000104  A$part3$1509                       part3
-C:   00000104  C$part3.c$97$1$28                  part3
-C:   00000104  C$part3.c$99$1$31                  part3
-C:   00000104  G$int0_interrupt$0$0               part3
-C:   00000104  _int0_interrupt                    part3
-C:   00000107  A$part3$1512                       part3
-C:   00000107  C$part3.c$100$1$31                 part3
-C:   00000107  XG$int0_interrupt$0$0              part3
-C:   00000108  A$part3$1534                       part3
-C:   00000108  C$part3.c$106$1$31                 part3
-C:   00000108  C$part3.c$109$1$31                 part3
-C:   00000108  G$SYSCLK_INIT$0$0                  part3
-C:   00000108  _SYSCLK_INIT                       part3
-C:   0000010A  A$part3$1537                       part3
-C:   0000010A  C$part3.c$110$1$33                 part3
-C:   0000010D  A$part3$1540                       part3
-C:   0000010D  C$part3.c$112$1$33                 part3
-C:   00000110  A$part3$1543                       part3
-C:   00000110  C$part3.c$113$1$33                 part3
-C:   00000112  A$part3$1544                       part3
-C:   00000114  A$part3$1546                       part3
-C:   00000115  A$part3$1547                       part3
-C:   00000118  A$part3$1548                       part3
-C:   00000119  A$part3$1550                       part3
-C:   0000011A  A$part3$1551                       part3
-C:   0000011B  A$part3$1552                       part3
-C:   0000011D  A$part3$1556                       part3
-C:   0000011D  C$part3.c$114$1$33                 part3
-C:   0000011F  A$part3$1557                       part3
-C:   00000122  A$part3$1560                       part3
-C:   00000122  C$part3.c$115$1$33                 part3
-C:   00000125  A$part3$1563                       part3
-C:   00000125  C$part3.c$116$1$33                 part3
-C:   00000127  A$part3$1564                       part3
-C:   00000129  A$part3$1565                       part3
-C:   0000012A  A$part3$1566                       part3
-C:   0000012C  A$part3$1569                       part3
-C:   0000012C  C$part3.c$118$1$33                 part3
-C:   0000012E  A$part3$1572                       part3
+C:   00000131  A$part4a$1560                      part4a
+C:   00000131  C$part4a.c$114$2$30                part4a
+C:   00000134  A$part4a$1563                      part4a
+C:   00000134  C$part4a.c$116$2$30                part4a
+C:   00000137  A$part4a$1566                      part4a
+C:   00000137  C$part4a.c$117$2$30                part4a
+C:   0000013A  A$part4a$1569                      part4a
+C:   0000013A  C$part4a.c$118$2$30                part4a
+C:   0000013D  A$part4a$1572                      part4a
+C:   0000013D  C$part4a.c$119$2$30                part4a
+C:   00000140  A$part4a$1575                      part4a
+C:   00000140  C$part4a.c$120$2$30                part4a
+C:   00000143  A$part4a$1578                      part4a
+C:   00000143  C$part4a.c$121$2$30                part4a
+C:   00000146  A$part4a$1581                      part4a
+C:   00000146  C$part4a.c$122$2$30                part4a
+C:   00000149  A$part4a$1584                      part4a
+C:   00000149  C$part4a.c$123$2$30                part4a
+C:   0000014C  A$part4a$1587                      part4a
+C:   0000014C  C$part4a.c$125$2$30                part4a
+C:   0000014E  A$part4a$1588                      part4a
+C:   00000150  A$part4a$1589                      part4a
+C:   00000152  A$part4a$1590                      part4a
+C:   00000154  A$part4a$1591                      part4a
+C:   00000155  A$part4a$1592                      part4a
+C:   00000156  A$part4a$1593                      part4a
+C:   00000157  A$part4a$1594                      part4a
+C:   00000158  A$part4a$1595                      part4a
+C:   00000159  A$part4a$1596                      part4a
+C:   0000015A  A$part4a$1599                      part4a
+C:   0000015A  C$part4a.c$127$2$30                part4a
+C:   0000015D  A$part4a$1602                      part4a
+C:   0000015D  C$part4a.c$128$2$30                part4a
+C:   0000015F  A$part4a$1605                      part4a
+C:   0000015F  C$part4a.c$129$2$30                part4a
+C:   00000161  A$part4a$1606                      part4a
+C:   00000164  A$part4a$1609                      part4a
+C:   00000164  C$part4a.c$131$1$29                part4a
+C:   00000164  XG$main$0$0                        part4a
+C:   00000165  A$part4a$1625                      part4a
+C:   00000165  C$part4a.c$137$1$29                part4a
+C:   00000165  C$part4a.c$140$1$29                part4a
+C:   00000165  G$SYSCLK_INIT$0$0                  part4a
+C:   00000165  _SYSCLK_INIT                       part4a
+C:   00000167  A$part4a$1628                      part4a
+C:   00000167  C$part4a.c$141$1$32                part4a
+C:   0000016A  A$part4a$1631                      part4a
+C:   0000016A  C$part4a.c$143$1$32                part4a
+C:   0000016D  A$part4a$1634                      part4a
+C:   0000016D  C$part4a.c$144$1$32                part4a
+C:   0000016F  A$part4a$1635                      part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 33.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000006D    00000156 =         342. bytes (REL,CON,CODE)
+CSEG                                0000006A    0000019C =         412. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000012E  C$part3.c$119$1$33                 part3
-C:   0000012E  XG$SYSCLK_INIT$0$0                 part3
-C:   0000012F  A$part3$1585                       part3
-C:   0000012F  C$part3.c$125$1$33                 part3
-C:   0000012F  C$part3.c$127$1$35                 part3
-C:   0000012F  G$PORT_INIT$0$0                    part3
-C:   0000012F  _PORT_INIT                         part3
-C:   00000132  A$part3$1588                       part3
-C:   00000132  C$part3.c$129$1$35                 part3
-C:   00000135  A$part3$1591                       part3
-C:   00000135  C$part3.c$130$1$35                 part3
-C:   00000138  A$part3$1594                       part3
-C:   00000138  C$part3.c$132$1$35                 part3
-C:   0000013B  A$part3$1597                       part3
-C:   0000013B  C$part3.c$133$1$35                 part3
-C:   0000013E  A$part3$1600                       part3
-C:   0000013E  C$part3.c$134$1$35                 part3
-C:   00000141  A$part3$1603                       part3
-C:   00000141  C$part3.c$136$1$35                 part3
-C:   00000144  A$part3$1606                       part3
-C:   00000144  C$part3.c$137$1$35                 part3
-C:   00000147  A$part3$1609                       part3
-C:   00000147  C$part3.c$139$1$35                 part3
-C:   0000014A  A$part3$1612                       part3
-C:   0000014A  C$part3.c$140$1$35                 part3
-C:   0000014C  A$part3$1615                       part3
-C:   0000014C  C$part3.c$141$1$35                 part3
-C:   0000014C  XG$PORT_INIT$0$0                   part3
-C:   0000014D  A$part3$1630                       part3
-C:   0000014D  C$part3.c$147$1$35                 part3
-C:   0000014D  C$part3.c$149$1$35                 part3
-C:   0000014D  G$UART0_INIT$0$0                   part3
-C:   0000014D  _UART0_INIT                        part3
-C:   0000014F  A$part3$1633                       part3
-C:   0000014F  C$part3.c$151$1$37                 part3
-C:   00000152  A$part3$1636                       part3
-C:   00000152  C$part3.c$152$1$37                 part3
-C:   00000155  A$part3$1639                       part3
-C:   00000155  C$part3.c$153$1$37                 part3
-C:   00000158  A$part3$1642                       part3
-C:   00000158  C$part3.c$155$1$37                 part3
-C:   0000015B  A$part3$1645                       part3
-C:   0000015B  C$part3.c$156$1$37                 part3
-C:   0000015D  A$part3$1646                       part3
-C:   0000015F  A$part3$1647                       part3
-C:   00000160  A$part3$1648                       part3
-C:   00000162  A$part3$1651                       part3
-C:   00000162  C$part3.c$157$1$37                 part3
-C:   00000165  A$part3$1654                       part3
-C:   00000165  C$part3.c$158$1$37                 part3
-C:   00000168  A$part3$1657                       part3
+C:   00000171  A$part4a$1637                      part4a
+C:   00000172  A$part4a$1638                      part4a
+C:   00000175  A$part4a$1639                      part4a
+C:   00000176  A$part4a$1641                      part4a
+C:   00000177  A$part4a$1642                      part4a
+C:   00000178  A$part4a$1643                      part4a
+C:   0000017A  A$part4a$1647                      part4a
+C:   0000017A  C$part4a.c$145$1$32                part4a
+C:   0000017C  A$part4a$1648                      part4a
+C:   0000017F  A$part4a$1651                      part4a
+C:   0000017F  C$part4a.c$146$1$32                part4a
+C:   00000182  A$part4a$1654                      part4a
+C:   00000182  C$part4a.c$147$1$32                part4a
+C:   00000184  A$part4a$1655                      part4a
+C:   00000186  A$part4a$1656                      part4a
+C:   00000187  A$part4a$1657                      part4a
+C:   00000189  A$part4a$1660                      part4a
+C:   00000189  C$part4a.c$149$1$32                part4a
+C:   0000018B  A$part4a$1663                      part4a
+C:   0000018B  C$part4a.c$150$1$32                part4a
+C:   0000018B  XG$SYSCLK_INIT$0$0                 part4a
+C:   0000018C  A$part4a$1676                      part4a
+C:   0000018C  C$part4a.c$156$1$32                part4a
+C:   0000018C  C$part4a.c$158$1$34                part4a
+C:   0000018C  G$PORT_INIT$0$0                    part4a
+C:   0000018C  _PORT_INIT                         part4a
+C:   0000018F  A$part4a$1679                      part4a
+C:   0000018F  C$part4a.c$160$1$34                part4a
+C:   00000192  A$part4a$1682                      part4a
+C:   00000192  C$part4a.c$161$1$34                part4a
+C:   00000195  A$part4a$1685                      part4a
+C:   00000195  C$part4a.c$163$1$34                part4a
+C:   00000198  A$part4a$1688                      part4a
+C:   00000198  C$part4a.c$164$1$34                part4a
+C:   0000019B  A$part4a$1691                      part4a
+C:   0000019B  C$part4a.c$165$1$34                part4a
+C:   0000019E  A$part4a$1694                      part4a
+C:   0000019E  C$part4a.c$167$1$34                part4a
+C:   000001A1  A$part4a$1697                      part4a
+C:   000001A1  C$part4a.c$168$1$34                part4a
+C:   000001A4  A$part4a$1700                      part4a
+C:   000001A4  C$part4a.c$170$1$34                part4a
+C:   000001A7  A$part4a$1703                      part4a
+C:   000001A7  C$part4a.c$171$1$34                part4a
+C:   000001A9  A$part4a$1706                      part4a
+C:   000001A9  C$part4a.c$172$1$34                part4a
+C:   000001A9  XG$PORT_INIT$0$0                   part4a
+C:   000001AA  A$part4a$1719                      part4a
+C:   000001AA  C$part4a.c$178$1$34                part4a
+C:   000001AA  C$part4a.c$180$1$36                part4a
+C:   000001AA  G$UART0_INIT$0$0                   part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 34.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000006D    00000156 =         342. bytes (REL,CON,CODE)
+CSEG                                0000006A    0000019C =         412. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000168  C$part3.c$159$1$37                 part3
-C:   0000016B  A$part3$1660                       part3
-C:   0000016B  C$part3.c$160$1$37                 part3
-C:   0000016E  A$part3$1663                       part3
-C:   0000016E  C$part3.c$161$1$37                 part3
-C:   00000170  A$part3$1666                       part3
-C:   00000170  C$part3.c$163$1$37                 part3
-C:   00000173  A$part3$1669                       part3
-C:   00000173  C$part3.c$164$1$37                 part3
-C:   00000175  A$part3$1672                       part3
-C:   00000175  C$part3.c$166$1$37                 part3
-C:   00000177  A$part3$1675                       part3
-C:   00000177  C$part3.c$167$1$37                 part3
-C:   00000177  XG$UART0_INIT$0$0                  part3
-C:   00000178  A$part3$1690                       part3
-C:   00000178  C$part3.c$169$1$37                 part3
-C:   00000178  C$part3.c$171$1$37                 part3
-C:   00000178  G$ADC_INIT$0$0                     part3
-C:   00000178  _ADC_INIT                          part3
-C:   0000017A  A$part3$1693                       part3
-C:   0000017A  C$part3.c$172$1$39                 part3
-C:   0000017D  A$part3$1696                       part3
-C:   0000017D  C$part3.c$174$1$39                 part3
-C:   00000180  A$part3$1699                       part3
-C:   00000180  C$part3.c$175$1$39                 part3
-C:   00000183  A$part3$1702                       part3
-C:   00000183  C$part3.c$176$1$39                 part3
-C:   00000186  A$part3$1705                       part3
-C:   00000186  C$part3.c$177$1$39                 part3
-C:   00000189  A$part3$1708                       part3
-C:   00000189  C$part3.c$178$1$39                 part3
-C:   0000018C  A$part3$1711                       part3
-C:   0000018C  C$part3.c$179$1$39                 part3
-C:   0000018E  A$part3$1714                       part3
-C:   0000018E  C$part3.c$180$1$39                 part3
-C:   0000018E  XG$ADC_INIT$0$0                    part3
-C:   0000018F  A$part3$1727                       part3
-C:   0000018F  C$part3.c$182$1$39                 part3
-C:   0000018F  C$part3.c$184$1$41                 part3
-C:   0000018F  G$DAC_INIT$0$0                     part3
-C:   0000018F  _DAC_INIT                          part3
-C:   00000192  A$part3$1730                       part3
-C:   00000192  C$part3.c$185$1$41                 part3
-C:   00000195  A$part3$1733                       part3
-C:   00000195  C$part3.c$186$1$41                 part3
-C:   00000195  XG$DAC_INIT$0$0                    part3
-C:   00000196  A$part3$1746                       part3
-C:   00000196  C$part3.c$188$1$41                 part3
-C:   00000196  C$part3.c$189$1$43                 part3
-C:   00000196  G$INTERRUPT_INIT$0$0               part3
-C:   00000196  _INTERRUPT_INIT                    part3
+C:   000001AA  _UART0_INIT                        part4a
+C:   000001AD  A$part4a$1722                      part4a
+C:   000001AD  C$part4a.c$181$1$36                part4a
+C:   000001B0  A$part4a$1725                      part4a
+C:   000001B0  C$part4a.c$182$1$36                part4a
+C:   000001B3  A$part4a$1728                      part4a
+C:   000001B3  C$part4a.c$184$1$36                part4a
+C:   000001B6  A$part4a$1731                      part4a
+C:   000001B6  C$part4a.c$185$1$36                part4a
+C:   000001B8  A$part4a$1732                      part4a
+C:   000001BA  A$part4a$1733                      part4a
+C:   000001BB  A$part4a$1734                      part4a
+C:   000001BD  A$part4a$1737                      part4a
+C:   000001BD  C$part4a.c$186$1$36                part4a
+C:   000001C0  A$part4a$1740                      part4a
+C:   000001C0  C$part4a.c$187$1$36                part4a
+C:   000001C3  A$part4a$1743                      part4a
+C:   000001C3  C$part4a.c$188$1$36                part4a
+C:   000001C6  A$part4a$1746                      part4a
+C:   000001C6  C$part4a.c$189$1$36                part4a
+C:   000001C9  A$part4a$1749                      part4a
+C:   000001C9  C$part4a.c$190$1$36                part4a
+C:   000001CB  A$part4a$1752                      part4a
+C:   000001CB  C$part4a.c$192$1$36                part4a
+C:   000001CE  A$part4a$1755                      part4a
+C:   000001CE  C$part4a.c$193$1$36                part4a
+C:   000001D0  A$part4a$1758                      part4a
+C:   000001D0  C$part4a.c$194$1$36                part4a
+C:   000001D0  XG$UART0_INIT$0$0                  part4a
+C:   000001D1  A$part4a$1771                      part4a
+C:   000001D1  C$part4a.c$196$1$36                part4a
+C:   000001D1  C$part4a.c$198$1$38                part4a
+C:   000001D1  G$ADC_INIT$0$0                     part4a
+C:   000001D1  _ADC_INIT                          part4a
+C:   000001D4  A$part4a$1774                      part4a
+C:   000001D4  C$part4a.c$199$1$38                part4a
+C:   000001D7  A$part4a$1777                      part4a
+C:   000001D7  C$part4a.c$200$1$38                part4a
+C:   000001DA  A$part4a$1780                      part4a
+C:   000001DA  C$part4a.c$201$1$38                part4a
+C:   000001DD  A$part4a$1783                      part4a
+C:   000001DD  C$part4a.c$202$1$38                part4a
+C:   000001E0  A$part4a$1786                      part4a
+C:   000001E0  C$part4a.c$203$1$38                part4a
+C:   000001E3  A$part4a$1789                      part4a
+C:   000001E3  C$part4a.c$204$1$38                part4a
+C:   000001E5  A$part4a$1792                      part4a
+C:   000001E5  C$part4a.c$205$1$38                part4a
+C:   000001E5  XG$ADC_INIT$0$0                    part4a
+C:   000001E6  A$part4a$1805                      part4a
+C:   000001E6  C$part4a.c$207$1$38                part4a
 ASxxxx Linker V03.00 + NoICE + sdld,  page 35.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000006D    00000156 =         342. bytes (REL,CON,CODE)
+CSEG                                0000006A    0000019C =         412. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000198  A$part3$1749                       part3
-C:   00000198  C$part3.c$191$1$43                 part3
-C:   0000019A  A$part3$1752                       part3
-C:   0000019A  C$part3.c$192$1$43                 part3
-C:   0000019A  XG$INTERRUPT_INIT$0$0              part3
-C:   0000019B  A$part3$1765                       part3
-C:   0000019B  C$part3.c$194$1$43                 part3
-C:   0000019B  C$part3.c$195$1$45                 part3
-C:   0000019B  G$TIMER_INIT$0$0                   part3
-C:   0000019B  _TIMER_INIT                        part3
-C:   0000019E  A$part3$1768                       part3
-C:   0000019E  C$part3.c$196$1$45                 part3
-C:   000001A1  A$part3$1771                       part3
-C:   000001A1  C$part3.c$197$1$45                 part3
-C:   000001A3  A$part3$1774                       part3
-C:   000001A3  C$part3.c$198$1$45                 part3
-C:   000001A3  XG$TIMER_INIT$0$0                  part3
-C:   000001A4  __gptrput                          _gptrput
-C:   000001BF  __sdcc_external_startup            _startup
+C:   000001E6  C$part4a.c$209$1$40                part4a
+C:   000001E6  G$DAC_INIT$0$0                     part4a
+C:   000001E6  _DAC_INIT                          part4a
+C:   000001E9  A$part4a$1808                      part4a
+C:   000001E9  C$part4a.c$210$1$40                part4a
+C:   000001EC  A$part4a$1811                      part4a
+C:   000001EC  C$part4a.c$211$1$40                part4a
+C:   000001EC  XG$DAC_INIT$0$0                    part4a
+C:   000001ED  A$part4a$1824                      part4a
+C:   000001ED  C$part4a.c$213$1$40                part4a
+C:   000001ED  C$part4a.c$214$1$42                part4a
+C:   000001ED  G$INTERRUPT_INIT$0$0               part4a
+C:   000001ED  _INTERRUPT_INIT                    part4a
+C:   000001EF  A$part4a$1827                      part4a
+C:   000001EF  C$part4a.c$215$1$42                part4a
+C:   000001F1  A$part4a$1830                      part4a
+C:   000001F1  C$part4a.c$216$1$42                part4a
+C:   000001F1  XG$INTERRUPT_INIT$0$0              part4a
+C:   000001F2  A$part4a$1843                      part4a
+C:   000001F2  C$part4a.c$218$1$42                part4a
+C:   000001F2  C$part4a.c$219$1$44                part4a
+C:   000001F2  G$TIMER_INIT$0$0                   part4a
+C:   000001F2  _TIMER_INIT                        part4a
+C:   000001F5  A$part4a$1846                      part4a
+C:   000001F5  C$part4a.c$220$1$44                part4a
+C:   000001F8  A$part4a$1849                      part4a
+C:   000001F8  C$part4a.c$221$1$44                part4a
+C:   000001FA  A$part4a$1852                      part4a
+C:   000001FA  C$part4a.c$222$1$44                part4a
+C:   000001FA  XG$TIMER_INIT$0$0                  part4a
+C:   000001FB  A$part4a$1865                      part4a
+C:   000001FB  C$part4a.c$224$1$44                part4a
+C:   000001FB  C$part4a.c$225$1$46                part4a
+C:   000001FB  G$MAC_INIT$0$0                     part4a
+C:   000001FB  _MAC_INIT                          part4a
+C:   000001FE  A$part4a$1868                      part4a
+C:   000001FE  C$part4a.c$226$1$46                part4a
+C:   00000201  A$part4a$1871                      part4a
+C:   00000201  C$part4a.c$227$1$46                part4a
+C:   00000201  XG$MAC_INIT$0$0                    part4a
+C:   00000202  __sdcc_external_startup            _startup
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 36.
 
 Files Linked                              [ module(s) ]
 
-C:\Users\Justin\Documents\MPS\git\final\part3.rel
+C:\Users\Justin\Documents\MPS\git\final\part4a.rel
                                           [  ]
 
 
@@ -1469,8 +1538,6 @@ C:\Program Files (x86)\SDCC\bin\..\lib\small/mcs51.lib
                                           [ crtclear.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\small/mcs51.lib
                                           [ crtxinit.rel ]
-C:\Program Files (x86)\SDCC\bin\..\lib\small/libsdcc.lib
-                                          [ _gptrput.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\small/mcs51.lib
                                           [ crtxclear.rel ]
 C:\Program Files (x86)\SDCC\bin\..\lib\small/mcs51.lib

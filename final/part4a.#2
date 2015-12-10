@@ -1,0 +1,228 @@
+//------------------------------------------------------------------------------------
+// lab4_part4.c
+//------------------------------------------------------------------------------------
+// Part 4 builds upon parts 1 and 3 of lab 4 by using the ADC and DAC, as well as the
+// MAC, to implement a notch filter. 
+//------------------------------------------------------------------------------------
+// Includes
+//------------------------------------------------------------------------------------
+#include <c8051f120.h>
+#include <stdio.h>
+#include "putget.h"
+
+//------------------------------------------------------------------------------------
+// Global Constants
+//------------------------------------------------------------------------------------
+#define EXTCLK 22118400	// External oscillator frequency in Hz
+#define SYSCLK 22118400
+#define BAUDRATE 115200	// UART baud rate in bps
+
+//------------------------------------------------------------------------------------
+// Function Prototypes
+//------------------------------------------------------------------------------------
+void main(void);
+void SYSCLK_INIT(void);
+void PORT_INIT(void);
+void UART0_INIT(void);
+void ADC_INIT(void);
+void INTERRUPT_INIT(void);
+void DAC_INIT(void);
+void TIMER_INIT(void);
+void MAC_INIT(void);
+
+// Global Variables
+char start_conversion = 0; // Flag to indicate when to start the ADC
+unsigned int dig_val = 0;
+
+//------------------------------------------------------------------------------------
+// MAIN Routine
+//------------------------------------------------------------------------------------
+void main(void)
+{
+	unsigned char adcValH[5];
+	unsigned char adcValL[5];
+	unsigned int result;
+	unsigned int results[2];
+	unsigned short int analogval;
+	unsigned char analoghi, analoglow;
+	float VREF = 3;
+
+	WDTCN = 0xDE; // Disable the watchdog timer
+	WDTCN = 0xAD;
+	
+	PORT_INIT(); // Initialize the Crossbar and GPIO
+	SYSCLK_INIT(); // Initialize the oscillator
+	ADC_INIT(); // Initialize ADC0
+	DAC_INIT();
+	MAC_INIT();
+
+	adcValH[4] = adcValH[3] = adcValL[4] = adcValL[3] = adcValH[2] = adcValH[1] = adcValL[2] = adcValL[1] = 0;
+	result = 0;
+	results[1] = results[0] = 0;
+	while(1)
+	{
+		SFRPAGE = ADC0_PAGE;
+		AD0INT = 0; // Clear the "conversion done" flag
+		AD0BUSY = 1; // Start A/D Conversion
+		while (AD0INT == 0); // Wait for the conversion to finish
+		analoglow = ADC0L; // Read the low byte
+		analoghi = ADC0H; // Read the high byte
+		analogval = analoghi<<8 | analoglow;
+
+		// Update the variables in the filter equation
+		adcValH[4] = adcValH[3]; // x(k-2) high byte
+		adcValH[3] = adcValH[2]; // x(k-1) high byte
+		adcValL[4] = adcValL[3]; // x(k-2) low byte
+		adcValL[3] = adcValL[2]; // x(k-1) low byte
+		adcValH[2] = adcValH[1]; // x(k-2) high byte
+		adcValH[1] = adcValH[0]; // x(k-1) high byte
+		adcValL[2] = adcValL[1]; // x(k-2) low byte
+		adcValL[1] = adcValL[0]; // x(k-1) low byte
+		results[1] = results[0];
+		results[0] = result;
+
+		adcValH[0] = analoghi; // x(k) high and low bytes
+		adcValL[0] = analoglow;
+
+		SFRPAGE = MAC0_PAGE;
+		MAC0CF |= 0x08; // Clear MAC
+
+		// Load the MAC with the correct values and compute the filter equation
+		MAC0AH = 0x20;
+		MAC0AL = 0x00;
+		MAC0BH = result>>8;
+		MAC0BL = result;
+
+		MAC0AH = 0x20;
+		MAC0AL = 0x00;
+		MAC0BH = results[1]>>8;
+		MAC0BL = results[1];
+		
+		MAC0AH = 0x10;
+		MAC0AL = 0x00;
+		MAC0BH = adcValH[2];
+		MAC0BL = adcValL[2];
+
+		MAC0AH = 0x20;
+		MAC0AL = 0x00;
+		MAC0BH = adcValH[1];
+		MAC0BL = adcValL[1];
+
+		MAC0AH = 0x10;
+		MAC0AL = 0x00;
+		MAC0BH = adcValH[0];
+		MAC0BL = adcValL[0];
+
+		SFRPAGE = MAC0_PAGE;
+		SFRPAGE = MAC0_PAGE;
+		SFRPAGE = MAC0_PAGE;
+		SFRPAGE = MAC0_PAGE;
+		SFRPAGE = MAC0_PAGE;
+		SFRPAGE = MAC0_PAGE;
+		SFRPAGE = MAC0_PAGE;
+		SFRPAGE = MAC0_PAGE; // Delay with any dummy command
+
+		result = (int)MAC0RNDH<<8 | MAC0RNDL; // Read the result from the rounding engine
+
+		SFRPAGE = DAC0_PAGE; // Output the result through the DAC
+		DAC0L = result;
+		DAC0H = result>>8;
+	}
+}
+
+//------------------------------------------------------------------------------------
+// SYSCLK_Init
+//------------------------------------------------------------------------------------
+// Initialize the system clock to use a 22.1184MHz crystal as its clock source
+void SYSCLK_INIT(void)
+{
+	int i = 0;
+	char SFRPAGE_SAVE = SFRPAGE;
+    SFRPAGE = CONFIG_PAGE;
+
+    OSCXCN = 0x67;
+    for (i = 0; i < 3000; i++);  // Wait 1ms for initialization
+    while ((OSCXCN & 0x80) == 0);
+    CLKSEL = 0x01;
+    OSCICN &= ~0x80;
+
+    SFRPAGE = SFRPAGE_SAVE;
+}
+
+//------------------------------------------------------------------------------------
+// PORT_Init
+//------------------------------------------------------------------------------------
+// Configure the Crossbar and GPIO ports
+void PORT_INIT(void)
+{	
+	SFRPAGE = CONFIG_PAGE;
+
+	WDTCN	= 0xDE;			// Disable watchdog timer.
+	WDTCN	= 0xAD;
+
+    XBR0 = 0x04;
+    XBR1 = 0x04; // Enable external interrupt
+    XBR2 = 0x40; //Enable crossbar
+
+	P0MDOUT = 0x01;// Set TX0 pin to push-pull, RX and Push Button to open drain
+	P0 = 0x06; // Inputs RX and Push Button set to high impedence
+
+	SFRPAGE = LEGACY_PAGE;
+	IT0 = 0; // /INT0 is edge triggered, falling-edge.
+}
+
+//------------------------------------------------------------------------------------
+// UART0_Init
+//------------------------------------------------------------------------------------
+// Configure the UART0 using Timer1, for <baudrate> and 8-N-1
+void UART0_INIT(void)
+{
+	SFRPAGE = UART0_PAGE;
+	SCON0	 = 0x50; // Mode 1, 8-bit UART, enable RX
+	SSTA0	 = 0x10; // SMOD0 = 1
+	
+	SFRPAGE = TIMER01_PAGE;
+	TMOD	&= ~0xF0;
+	TMOD	|=  0x20;	// Timer1, Mode 2, 8-bit reload
+	TH1		 = -SYSCLK/(BAUDRATE*16); // Set Timer1 reload baudrate value T1 Hi Byte
+	CKCON	|= 0x10; // Timer1 uses SYSCLK as time base
+	TL1		 = TH1;
+	TR1		 = 1;	// Start Timer1
+
+	SFRPAGE = UART0_PAGE;
+	TI0 = 1; // Indicate TX0 ready
+}
+
+void ADC_INIT(void)
+{
+	SFRPAGE = ADC0_PAGE;
+	AMX0CF = 0x00; // All input ports set to single-ended mode
+	AMX0SL = 0x00; // Select port AIN0.0 for inpit
+	ADC0CF = 0x20; // ADC clock rate < 2.5MHz, internal gain of 1
+	ADC0CN = 0X00;
+	REF0CN = 0X02; // Voltage reference from VREF0 pin; enable bias generator and disable reference buffer
+	AD0EN = 1; //Enable ADC
+}
+
+void DAC_INIT(void)
+{
+	SFRPAGE = DAC0_PAGE;
+	DAC0CN = 0x80;
+}
+
+void INTERRUPT_INIT(void) {
+	EA = 1;
+	EX0 = 1; //External interrupts
+}
+
+void TIMER_INIT(void) {
+	TMOD = 0x01; // Timer0 in 16-bit mode
+	CKCON = 0x08; // Timer0 uses sysclk
+	TR0 = 1; // Enable Timer0
+}
+
+void MAC_INIT(void) {
+	SFRPAGE = MAC0_PAGE;
+	MAC0CF = 0x1A; //MAC mode, fractional mode, rounding will not saturate, reset MAC, shift right
+}
+
